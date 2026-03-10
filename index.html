@@ -3,277 +3,389 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FlightMatch — Find & Share Any Flight</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>VelocityAir — Premium Flight Finder</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #f5f2eb;
-  --surface: #ffffff;
-  --ink: #1a1612;
-  --ink-2: #5c5448;
-  --ink-3: #9e9488;
-  --accent: #d4500a;
-  --accent-light: #fceee6;
-  --accent-2: #1a6b5a;
-  --accent-2-light: #e2f3ef;
-  --border: #e0d8ce;
-  --shadow: 0 2px 12px rgba(26,22,18,0.08);
-  --shadow-lg: 0 8px 40px rgba(26,22,18,0.14);
-  --mono: 'DM Mono', monospace;
-  --sans: 'Syne', sans-serif;
-  --radius: 10px;
+  --bg: #0c0c0e;
+  --surface: #111115;
+  --card: #16161c;
+  --border: #2a2a35;
+  --border-light: #3a3a48;
+  --gold: #c9a84c;
+  --gold-light: #e2c47a;
+  --gold-dim: #6b5520;
+  --gold-bg: rgba(201,168,76,0.07);
+  --silver: #a8afc0;
+  --platinum: #d4d8e8;
+  --white: #f0eeea;
+  --muted: #5c5c70;
+  --green: #2ecc71;
+  --amber: #f0a500;
+  --red: #e74c3c;
+  --blue: #4a9eff;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Jost', sans-serif;
+  --radius: 12px;
+
+  /* Class colors */
+  --economy-color: #7a8aaa;
+  --business-color: #c9a84c;
+  --first-color: #e8d5a3;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body {
-  min-height: 100vh;
+html { scroll-behavior: smooth; }
+
+body {
   background: var(--bg);
-  color: var(--ink);
+  color: var(--white);
   font-family: var(--sans);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* textured bg */
-body::before {
+/* Grain texture */
+body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='%23c8bfb0' opacity='0.35'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
-  z-index: 0;
-}
-
-/* ── LAYOUT ── */
-.page {
-  position: relative;
-  z-index: 1;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 48px 24px 80px;
+  z-index: 9999;
+  opacity: 0.4;
 }
 
 /* ── HEADER ── */
-.header {
-  margin-bottom: 48px;
-}
-
-.wordmark {
+header {
+  padding: 28px 48px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  position: relative;
 }
 
-.logo-mark {
-  width: 38px;
-  height: 38px;
-  background: var(--accent);
-  border-radius: 8px;
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-emblem {
+  width: 42px; height: 42px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  color: white;
-  flex-shrink: 0;
-  box-shadow: 3px 3px 0 rgba(212,80,10,0.25);
+  color: var(--gold);
+  position: relative;
 }
 
-.brand {
+.logo-emblem::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.2);
+}
+
+.logo-name {
+  font-family: var(--serif);
   font-size: 1.6rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--white);
 }
 
-.tagline {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  color: var(--ink-3);
+.logo-tagline {
+  font-size: 0.6rem;
+  color: var(--gold);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.class-selector {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.class-btn {
+  padding: 7px 16px;
+  border-radius: 24px;
+  border: none;
+  background: none;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.class-btn.active-economy { background: var(--card); color: var(--economy-color); border: 1px solid rgba(122,138,170,0.3); }
+.class-btn.active-business { background: var(--gold-bg); color: var(--gold); border: 1px solid var(--gold-dim); }
+.class-btn.active-first { background: rgba(232,213,163,0.08); color: var(--first-color); border: 1px solid rgba(232,213,163,0.3); }
+
+.class-btn:hover:not([class*="active"]) { color: var(--silver); }
+
+/* ── HERO ── */
+.hero {
+  padding: 60px 48px 48px;
+  text-align: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(201,168,76,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.hero-sub {
+  font-size: 0.85rem;
+  color: var(--muted);
   letter-spacing: 0.05em;
-  line-height: 1.5;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
-/* ── INPUT SECTION ── */
+/* ── MAIN ── */
+.main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 48px 80px;
+}
+
+/* ── INPUT CARD ── */
 .input-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 28px;
-  box-shadow: var(--shadow);
-  margin-bottom: 24px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  position: relative;
 }
 
-.input-label {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 12px;
+.input-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.input-header {
+  padding: 20px 24px 0;
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: space-between;
 }
 
-.input-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
+.input-label-text {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
 }
+
+.selected-class-badge {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.badge-economy { background: rgba(122,138,170,0.1); color: var(--economy-color); border: 1px solid rgba(122,138,170,0.2); }
+.badge-business { background: var(--gold-bg); color: var(--gold); border: 1px solid var(--gold-dim); }
+.badge-first { background: rgba(232,213,163,0.08); color: var(--first-color); border: 1px solid rgba(232,213,163,0.2); }
 
 textarea {
   width: 100%;
-  min-height: 130px;
-  background: var(--bg);
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
-  padding: 14px 16px;
-  font-family: var(--mono);
-  font-size: 0.9rem;
-  color: var(--ink);
-  resize: vertical;
+  min-height: 120px;
+  background: transparent;
+  border: none;
+  padding: 16px 24px 20px;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: var(--white);
+  resize: none;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  line-height: 1.6;
-}
-
-textarea::placeholder {
-  color: var(--ink-3);
   line-height: 1.7;
+  letter-spacing: 0.02em;
 }
 
-textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(212,80,10,0.1);
+textarea::placeholder { color: var(--muted); }
+
+.input-footer {
+  padding: 0 24px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
 }
 
-.input-hints {
+.hint-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 12px;
 }
 
-.hint-chip {
-  background: var(--accent-light);
-  color: var(--accent);
-  font-family: var(--mono);
+.chip {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted);
   font-size: 0.65rem;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.15s;
-  border: 1px solid transparent;
+  letter-spacing: 0.04em;
   white-space: nowrap;
 }
 
-.hint-chip:hover {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: white;
-}
+.chip:hover { border-color: var(--gold-dim); color: var(--gold); background: var(--gold-bg); }
 
 .find-btn {
-  width: 100%;
-  margin-top: 18px;
-  padding: 16px;
-  background: var(--ink);
-  color: var(--bg);
+  padding: 13px 32px;
+  background: linear-gradient(135deg, #c9a84c, #a8863a);
+  color: #0c0c0e;
   border: none;
   border-radius: 8px;
   font-family: var(--sans);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  position: relative;
-  overflow: hidden;
+  white-space: nowrap;
 }
 
-.find-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--accent);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-}
+.find-btn:hover { background: linear-gradient(135deg, #e2c47a, #c9a84c); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,168,76,0.25); }
+.find-btn:active { transform: translateY(0); }
+.find-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-.find-btn:hover::before { transform: translateX(0); }
-.find-btn span { position: relative; z-index: 1; }
-.find-btn:active { transform: scale(0.99); }
-.find-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-
-/* ── LOADING STATE ── */
+/* ── LOADER ── */
 .loader {
   display: none;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 32px;
+  padding: 48px;
   text-align: center;
-  box-shadow: var(--shadow);
+  margin-bottom: 20px;
 }
 
-.loader.visible { display: block; }
+.loader.visible { display: block; animation: fadein 0.3s ease; }
 
-.radar-ring {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 20px;
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+.loader-rings {
+  width: 56px; height: 56px;
+  margin: 0 auto 24px;
   position: relative;
 }
 
-.radar-ring::before,
-.radar-ring::after {
-  content: '';
+.loader-rings span {
   position: absolute;
   border-radius: 50%;
-  border: 2px solid var(--accent);
+  border: 1px solid var(--gold-dim);
+  animation: expand 2s ease-out infinite;
 }
 
-.radar-ring::before {
-  inset: 0;
-  animation: radar-pulse 1.8s ease-out infinite;
+.loader-rings span:nth-child(1) { inset: 0; animation-delay: 0s; }
+.loader-rings span:nth-child(2) { inset: 10px; animation-delay: 0.4s; border-color: var(--gold); }
+.loader-rings span:nth-child(3) { inset: 20px; animation-delay: 0.8s; }
+
+@keyframes expand {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: scale(1.3); opacity: 0; }
 }
 
-.radar-ring::after {
-  inset: 14px;
-  animation: radar-pulse 1.8s ease-out infinite 0.6s;
-}
-
-.radar-center {
+.loader-plane {
   position: absolute;
-  inset: 26px;
-  background: var(--accent);
-  border-radius: 50%;
-}
-
-@keyframes radar-pulse {
-  0% { transform: scale(0.6); opacity: 1; }
-  100% { transform: scale(1.5); opacity: 0; }
+  inset: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--gold);
 }
 
 .loader-text {
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  color: var(--ink-2);
-  letter-spacing: 0.05em;
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--silver);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
 }
 
 .loader-sub {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  color: var(--ink-3);
-  margin-top: 6px;
-  letter-spacing: 0.05em;
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* ── RESULT CARD ── */
@@ -283,469 +395,767 @@ textarea:focus {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  animation: slide-up 0.4s ease;
+  margin-bottom: 20px;
+  animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .result-card.visible { display: block; }
 
 @keyframes slide-up {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Top stripe */
-.result-stripe {
-  height: 5px;
-  background: linear-gradient(90deg, var(--accent), #e8820a, var(--accent-2));
-}
+/* Class-specific top border */
+.result-card.class-economy::before { content: ''; display: block; height: 2px; background: linear-gradient(90deg, transparent, var(--economy-color), transparent); }
+.result-card.class-business::before { content: ''; display: block; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.result-card.class-first::before { content: ''; display: block; height: 3px; background: linear-gradient(90deg, transparent, var(--first-color), #c9a84c, var(--first-color), transparent); }
 
-.result-header {
-  padding: 24px 28px 20px;
-  border-bottom: 1px solid var(--border);
+/* Ticket header */
+.ticket-header {
+  padding: 24px 32px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  border-bottom: 1px solid var(--border);
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 16px;
 }
 
-.result-flight-id {
-  font-size: 2.2rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+.ticket-flight-info {}
+
+.ticket-flight-num {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--white);
   line-height: 1;
-  color: var(--ink);
 }
 
-.result-airline {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: var(--ink-3);
-  margin-top: 4px;
-  letter-spacing: 0.05em;
+.ticket-airline {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-top: 5px;
 }
 
-.status-pill {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  font-weight: 500;
+.ticket-badges {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.status-tag {
+  font-size: 0.62rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 6px 14px;
+  padding: 5px 14px;
   border-radius: 20px;
+  font-weight: 600;
 }
 
-.status-pill.on-time  { background: var(--accent-2-light); color: var(--accent-2); }
-.status-pill.delayed  { background: #fef3e2; color: #c47a00; }
-.status-pill.landed   { background: #e8f0fe; color: #1a56b0; }
-.status-pill.cancelled{ background: #fde8e8; color: #c0392b; }
+.status-on-time  { background: rgba(46,204,113,0.1);  color: var(--green); border: 1px solid rgba(46,204,113,0.2); }
+.status-delayed  { background: rgba(240,165,0,0.1);   color: var(--amber); border: 1px solid rgba(240,165,0,0.2); }
+.status-landed   { background: rgba(74,158,255,0.1);  color: var(--blue);  border: 1px solid rgba(74,158,255,0.2); }
+.status-cancelled{ background: rgba(231,76,60,0.1);   color: var(--red);   border: 1px solid rgba(231,76,60,0.2); }
 
-/* Route display */
-.result-route {
-  padding: 28px;
+.class-tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.class-tag-economy  { background: rgba(122,138,170,0.1); color: var(--economy-color); border: 1px solid rgba(122,138,170,0.2); }
+.class-tag-business { background: var(--gold-bg); color: var(--gold); border: 1px solid var(--gold-dim); }
+.class-tag-first    { background: rgba(232,213,163,0.1); color: var(--first-color); border: 1px solid rgba(232,213,163,0.25); }
+
+/* Route */
+.ticket-route {
+  padding: 32px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
   border-bottom: 1px solid var(--border);
+  position: relative;
 }
 
-.airport-block { text-align: center; }
-.airport-block.right { text-align: center; }
+/* Decorative dashed line background */
+.ticket-route::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, var(--border) 0, var(--border) 6px, transparent 6px, transparent 12px);
+  z-index: 0;
+}
 
-.apt-code {
-  font-size: 3rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+.airport-col { position: relative; z-index: 1; }
+.airport-col.right { text-align: right; }
+
+.apt-iata {
+  font-family: var(--serif);
+  font-size: 3.5rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
   line-height: 1;
+  color: var(--white);
 }
 
-.apt-name {
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  color: var(--ink-3);
-  margin-top: 4px;
-  letter-spacing: 0.04em;
+.apt-city {
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-top: 6px;
+  text-transform: uppercase;
 }
 
 .apt-time {
-  font-family: var(--mono);
-  font-size: 1.1rem;
+  font-family: var(--serif);
+  font-size: 1.5rem;
   font-weight: 500;
-  color: var(--accent);
+  color: var(--gold-light);
   margin-top: 8px;
+  letter-spacing: 0.05em;
 }
 
-.apt-label {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  color: var(--ink-3);
+.apt-date {
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+
+.route-mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.route-plane-wrap {
+  width: 48px; height: 48px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--gold);
+  animation: hover-plane 4s ease-in-out infinite;
+}
+
+@keyframes hover-plane {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.route-duration {
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Class perks */
+.class-perks {
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.perk {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  color: var(--silver);
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+}
+
+.perk-icon { font-size: 12px; }
+
+.perk.gold { border-color: var(--gold-dim); color: var(--gold-light); background: var(--gold-bg); }
+.perk.platinum { border-color: rgba(212,216,232,0.2); color: var(--platinum); background: rgba(212,216,232,0.05); }
+
+/* Details grid */
+.ticket-details {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--border);
+}
+
+.detail-box {
+  padding: 20px 24px;
+  border-right: 1px solid var(--border);
+}
+
+.detail-box:last-child { border-right: none; }
+
+.detail-key {
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.detail-val {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: 0.04em;
+}
+
+/* Price section */
+.price-section {
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.price-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.price-val {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  letter-spacing: 0.04em;
+}
+
+.price-note {
+  font-size: 0.62rem;
+  color: var(--muted);
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+}
+
+.price-right {
+  display: flex;
+  gap: 8px;
+}
+
+.seat-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 10px 16px;
+  border-radius: 8px;
+}
+
+.seat-num {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.seat-lbl {
+  font-size: 0.55rem;
+  color: var(--muted);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-top: 2px;
 }
 
-.route-connector {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
-.route-plane-icon {
-  font-size: 1.5rem;
-  color: var(--accent);
-  animation: fly 3s ease-in-out infinite;
-}
-
-@keyframes fly {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-4px) rotate(3deg); }
-}
-
-.route-duration {
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  color: var(--ink-3);
-  letter-spacing: 0.06em;
-  white-space: nowrap;
-}
-
-.route-line-seg {
-  width: 60px;
-  height: 1.5px;
-  background: linear-gradient(90deg, var(--border), var(--accent));
-}
-
-/* Details grid */
-.result-details {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-}
-
-.detail-cell {
-  padding: 18px 20px;
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.detail-cell:nth-child(3n) { border-right: none; }
-.detail-cell:nth-last-child(-n+3) { border-bottom: none; }
-
-.detail-key {
-  font-family: var(--mono);
-  font-size: 0.58rem;
-  color: var(--ink-3);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 5px;
-}
-
-.detail-val {
-  font-family: var(--mono);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--ink);
-}
-
 /* Share section */
 .share-section {
-  padding: 24px 28px;
-  background: var(--ink);
-  color: var(--bg);
+  padding: 24px 32px;
+  background: var(--card);
 }
 
-.share-label {
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  color: var(--ink-3);
-  letter-spacing: 0.15em;
+.share-title {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.share-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.share-row {
+  display: flex;
+  gap: 10px;
   margin-bottom: 12px;
 }
 
-.share-url-row {
-  display: flex;
-  gap: 10px;
-  align-items: stretch;
-}
-
-.share-url-display {
+.share-url {
   flex: 1;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 12px 14px;
-  font-family: var(--mono);
+  padding: 12px 16px;
+  font-family: var(--sans);
   font-size: 0.72rem;
-  color: #88ccbb;
+  color: #6ab0ff;
   word-break: break-all;
-  line-height: 1.5;
+  letter-spacing: 0.02em;
 }
 
 .copy-btn {
-  padding: 12px 20px;
-  background: var(--accent);
-  color: white;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #c9a84c, #a8863a);
+  color: #0c0c0e;
   border: none;
   border-radius: 6px;
   font-family: var(--sans);
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.75rem;
+  font-weight: 600;
   cursor: pointer;
+  letter-spacing: 0.08em;
   transition: all 0.15s;
   white-space: nowrap;
-  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.copy-btn:hover { background: #e8620e; }
-.copy-btn.copied { background: var(--accent-2); }
+.copy-btn:hover { background: linear-gradient(135deg, #e2c47a, #c9a84c); }
+.copy-btn.copied { background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; }
 
-.share-extras {
-  display: flex;
-  gap: 10px;
-  margin-top: 12px;
+.share-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
 }
 
-.share-extra-btn {
-  flex: 1;
+.share-link-btn {
   padding: 10px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 6px;
-  color: #c8bfb0;
-  font-family: var(--mono);
+  color: var(--muted);
+  font-family: var(--sans);
   font-size: 0.65rem;
   letter-spacing: 0.06em;
   cursor: pointer;
   transition: all 0.15s;
   text-align: center;
+  text-transform: uppercase;
 }
 
-.share-extra-btn:hover {
-  background: rgba(255,255,255,0.12);
-  color: white;
-}
+.share-link-btn:hover { border-color: var(--gold-dim); color: var(--gold); background: var(--gold-bg); }
 
 /* ── ERROR ── */
 .error-card {
   display: none;
   background: var(--surface);
-  border: 1px solid #f5c6c6;
+  border: 1px solid rgba(231,76,60,0.2);
   border-radius: var(--radius);
-  padding: 28px;
+  padding: 40px;
   text-align: center;
-  box-shadow: var(--shadow);
+  margin-bottom: 20px;
 }
 
-.error-card.visible { display: block; animation: slide-up 0.3s ease; }
+.error-card.visible { display: block; animation: fadein 0.3s ease; }
+.error-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; }
+.error-title { font-family: var(--serif); font-size: 1.4rem; color: var(--red); margin-bottom: 8px; }
+.error-msg { font-size: 0.78rem; color: var(--muted); line-height: 1.7; letter-spacing: 0.03em; }
 
-.error-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
-.error-title {
-  font-weight: 700;
+/* ── AIRLINES REFERENCE ── */
+.airlines-section {
+  margin-top: 48px;
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.airlines-title {
+  font-family: var(--serif);
   font-size: 1.1rem;
-  color: #c0392b;
-  margin-bottom: 6px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--gold-light);
+  margin-bottom: 20px;
+  text-align: center;
 }
-.error-msg {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  color: var(--ink-2);
-  line-height: 1.6;
+
+.airlines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+.airline-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.airline-item:hover { border-color: var(--gold-dim); background: var(--gold-bg); }
+
+.airline-code {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+}
+
+.airline-name-sm {
+  font-size: 0.62rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-top: 2px;
 }
 
 /* ── TOAST ── */
 .toast {
   position: fixed;
-  bottom: 28px;
-  left: 50%;
+  bottom: 28px; left: 50%;
   transform: translateX(-50%) translateY(60px);
-  background: var(--ink);
-  color: var(--bg);
-  padding: 12px 22px;
+  background: var(--card);
+  border: 1px solid var(--gold-dim);
+  color: var(--gold-light);
+  padding: 12px 24px;
   border-radius: 8px;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-  z-index: 9999;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  z-index: 10000;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
+
 .toast.show { transform: translateX(-50%) translateY(0); }
 
-/* ── FOOTER ── */
-.footer {
-  margin-top: 48px;
-  text-align: center;
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  color: var(--ink-3);
-  letter-spacing: 0.06em;
+/* Responsive */
+@media (max-width: 640px) {
+  header { padding: 20px 24px; }
+  .hero { padding: 40px 24px 32px; }
+  .main { padding: 0 24px 60px; }
+  .ticket-details { grid-template-columns: repeat(2, 1fr); }
+  .share-links { grid-template-columns: 1fr 1fr; }
+  .header-right { display: none; }
+  .ticket-route { gap: 12px; }
+  .apt-iata { font-size: 2.5rem; }
 }
 </style>
 </head>
 <body>
-<div class="page">
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="wordmark">
-      <div class="logo-mark">✈</div>
-      <div class="brand">FlightMatch</div>
-    </div>
-    <div class="tagline">
-      Paste any flight info — we'll find the flight, times, and generate a live tracking link.
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-emblem">✦</div>
+    <div>
+      <div class="logo-name">VelocityAir</div>
+      <div class="logo-tagline">Premium Flight Intelligence</div>
     </div>
   </div>
+  <div class="header-right">
+    <div class="class-selector">
+      <button class="class-btn" onclick="setClass('economy')" id="btn-economy">Economy</button>
+      <button class="class-btn active-business" onclick="setClass('business')" id="btn-business">Business</button>
+      <button class="class-btn" onclick="setClass('first')" id="btn-first">First</button>
+    </div>
+  </div>
+</header>
 
-  <!-- INPUT CARD -->
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Flight Intelligence Platform</div>
+  <h1 class="hero-title">Find Any Flight,<br><em>Instantly Share It</em></h1>
+  <p class="hero-sub">Enter any flight information in natural language. We'll match it, show full details, and generate a live tracking link.</p>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- INPUT -->
   <div class="input-card">
-    <div class="input-label">Flight Information Input</div>
-    <textarea id="flight-input" placeholder="Describe your flight in any format, for example:
-
-• &quot;I'm flying American Airlines from Chicago O'Hare to Los Angeles tomorrow morning&quot;
-• &quot;AA 100 ORD to JFK&quot;
-• &quot;United flight from ORD to London Heathrow next Monday&quot;
-• &quot;My confirmation says UA2297 departing at 7:15am&quot;"></textarea>
-
-    <div class="input-hints">
-      <span class="hint-chip" onclick="fillHint(this)">AA 100 ORD → JFK</span>
-      <span class="hint-chip" onclick="fillHint(this)">United flight Chicago to Los Angeles</span>
-      <span class="hint-chip" onclick="fillHint(this)">UA 931 ORD to London</span>
-      <span class="hint-chip" onclick="fillHint(this)">Delta from Atlanta to Chicago</span>
-      <span class="hint-chip" onclick="fillHint(this)">Southwest ORD to Denver this morning</span>
+    <div class="input-header">
+      <div class="input-label-text">Flight Information</div>
+      <div class="selected-class-badge badge-business" id="class-badge">Business Class</div>
     </div>
+    <textarea id="flight-input" placeholder="Enter any flight details — flight number, airline, route, or a mix:
 
-    <button class="find-btn" id="find-btn" onclick="findFlight()">
-      <span>🔍</span>
-      <span>Find My Flight & Generate Link</span>
-    </button>
+  &quot;Delta One from JFK to LAX tomorrow morning&quot;
+  &quot;AA 100 first class Chicago to New York&quot;
+  &quot;United Polaris business ORD to London&quot;
+  &quot;Alaska Airlines Seattle to Miami&quot;"></textarea>
+    <div class="input-footer">
+      <div class="hint-chips">
+        <span class="chip" onclick="fillHint(this)">AA 100 First Class ORD→JFK</span>
+        <span class="chip" onclick="fillHint(this)">Delta One JFK to LAX</span>
+        <span class="chip" onclick="fillHint(this)">United Polaris ORD to London</span>
+        <span class="chip" onclick="fillHint(this)">Alaska SEA to MIA business</span>
+        <span class="chip" onclick="fillHint(this)">Southwest ORD to Denver</span>
+      </div>
+      <button class="find-btn" id="find-btn" onclick="findFlight()">Find Flight →</button>
+    </div>
   </div>
 
-  <!-- LOADING -->
+  <!-- LOADER -->
   <div class="loader" id="loader">
-    <div class="radar-ring"><div class="radar-center"></div></div>
-    <div class="loader-text">Scanning flight data...</div>
-    <div class="loader-sub" id="loader-sub">Parsing your information</div>
+    <div class="loader-rings">
+      <span></span><span></span><span></span>
+      <div class="loader-plane">✈</div>
+    </div>
+    <div class="loader-text" id="loader-text">Searching flight database...</div>
+    <div class="loader-sub" id="loader-sub">Analyzing your request</div>
   </div>
 
   <!-- RESULT -->
   <div class="result-card" id="result-card">
-    <div class="result-stripe"></div>
-    <div class="result-header">
-      <div>
-        <div class="result-flight-id" id="r-flight">—</div>
-        <div class="result-airline" id="r-airline">—</div>
+    <div class="ticket-header">
+      <div class="ticket-flight-info">
+        <div class="ticket-flight-num" id="r-flight">—</div>
+        <div class="ticket-airline" id="r-airline">—</div>
       </div>
-      <div class="status-pill" id="r-status-pill">—</div>
+      <div class="ticket-badges">
+        <span class="status-tag" id="r-status-tag">—</span>
+        <span class="class-tag" id="r-class-tag">—</span>
+      </div>
     </div>
 
-    <div class="result-route">
-      <div class="airport-block">
-        <div class="apt-code" id="r-from-code">—</div>
-        <div class="apt-name" id="r-from-name">—</div>
-        <div class="apt-time" id="r-dep-time">—</div>
-        <div class="apt-label">Departure</div>
+    <div class="ticket-route">
+      <div class="airport-col">
+        <div class="apt-iata" id="r-from">—</div>
+        <div class="apt-city" id="r-from-city">—</div>
+        <div class="apt-time" id="r-dep">—</div>
+        <div class="apt-date">Departure</div>
       </div>
-      <div class="route-connector">
-        <div class="route-line-seg"></div>
-        <div class="route-plane-icon">✈</div>
+      <div class="route-mid">
+        <div class="route-plane-wrap">✈</div>
         <div class="route-duration" id="r-duration">—</div>
-        <div class="route-line-seg" style="background: linear-gradient(90deg, var(--accent), var(--border))"></div>
       </div>
-      <div class="airport-block right">
-        <div class="apt-code" id="r-to-code">—</div>
-        <div class="apt-name" id="r-to-name">—</div>
-        <div class="apt-time" id="r-arr-time">—</div>
-        <div class="apt-label">Arrival</div>
+      <div class="airport-col right">
+        <div class="apt-iata" id="r-to">—</div>
+        <div class="apt-city" id="r-to-city">—</div>
+        <div class="apt-time" id="r-arr">—</div>
+        <div class="apt-date">Arrival</div>
       </div>
     </div>
 
-    <div class="result-details">
-      <div class="detail-cell">
+    <div class="class-perks" id="r-perks"></div>
+
+    <div class="ticket-details">
+      <div class="detail-box">
         <div class="detail-key">Aircraft</div>
         <div class="detail-val" id="r-aircraft">—</div>
       </div>
-      <div class="detail-cell">
+      <div class="detail-box">
         <div class="detail-key">Gate</div>
         <div class="detail-val" id="r-gate">—</div>
       </div>
-      <div class="detail-cell">
+      <div class="detail-box">
         <div class="detail-key">Terminal</div>
         <div class="detail-val" id="r-terminal">—</div>
       </div>
-      <div class="detail-cell">
-        <div class="detail-key">Class</div>
-        <div class="detail-val" id="r-class">—</div>
-      </div>
-      <div class="detail-cell">
-        <div class="detail-key">Flight Time</div>
-        <div class="detail-val" id="r-flighttime">—</div>
-      </div>
-      <div class="detail-cell">
+      <div class="detail-box">
         <div class="detail-key">Baggage</div>
         <div class="detail-val" id="r-baggage">—</div>
       </div>
     </div>
 
-    <div class="share-section">
-      <div class="share-label">🔗 Your Shareable Live Tracking Link</div>
-      <div class="share-url-row">
-        <div class="share-url-display" id="r-share-url">—</div>
-        <button class="copy-btn" id="copy-btn" onclick="copyShareUrl()">Copy</button>
+    <div class="price-section">
+      <div>
+        <div class="price-label">Estimated Fare</div>
+        <div class="price-val" id="r-price">—</div>
+        <div class="price-note" id="r-price-note">Per person, taxes included</div>
       </div>
-      <div class="share-extras">
-        <button class="share-extra-btn" onclick="openFlightAware()">↗ Open FlightAware</button>
-        <button class="share-extra-btn" onclick="openFlightRadar()">↗ Open FlightRadar24</button>
-        <button class="share-extra-btn" onclick="shareViaAPI()">📤 Share via…</button>
+      <div class="price-right">
+        <div class="seat-badge">
+          <div class="seat-num" id="r-seat">14A</div>
+          <div class="seat-lbl">Seat</div>
+        </div>
+        <div class="seat-badge">
+          <div class="seat-num" id="r-meal">🍽</div>
+          <div class="seat-lbl">Meal</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="share-section">
+      <div class="share-title">Live Tracking Link</div>
+      <div class="share-row">
+        <div class="share-url" id="r-share-url">—</div>
+        <button class="copy-btn" id="copy-btn" onclick="copyUrl()">Copy</button>
+      </div>
+      <div class="share-links">
+        <button class="share-link-btn" onclick="openFlightAware()">↗ FlightAware</button>
+        <button class="share-link-btn" onclick="openFlightRadar()">↗ FlightRadar24</button>
+        <button class="share-link-btn" onclick="nativeShare()">📤 Share…</button>
       </div>
     </div>
   </div>
 
   <!-- ERROR -->
   <div class="error-card" id="error-card">
-    <span class="error-icon">🔍</span>
-    <div class="error-title">No Matching Flight Found</div>
-    <div class="error-msg" id="error-msg">We couldn't match your input to a specific flight. Try including the flight number, airline name, or route (e.g. "AA 100 from Chicago to New York").</div>
+    <span class="error-icon">✦</span>
+    <div class="error-title">No Flight Matched</div>
+    <div class="error-msg" id="error-msg">We couldn't find a matching flight. Try including the flight number, airline name, or specific route.</div>
   </div>
 
-  <div class="footer">FlightMatch · Powered by Claude AI · Real-time data via FlightAware & FlightRadar24</div>
+  <!-- AIRLINES REFERENCE -->
+  <div class="airlines-section">
+    <div class="airlines-title">Supported US Airlines</div>
+    <div class="airlines-grid" id="airlines-grid"></div>
+  </div>
+
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
 // ══════════════════════════════════════════════════
-// FLIGHT DATABASE
+// STATE
 // ══════════════════════════════════════════════════
-const FLIGHTS = [
-  { flight:"AA 100",  airline:"American Airlines",  from:"ORD", fromName:"Chicago O'Hare",      to:"JFK", toName:"New York JFK",         dep:"06:30", arr:"10:05", status:"on-time",   aircraft:"Boeing 737-800", gate:"H3",  terminal:"3", duration:"2h 35m", baggage:"Carousel 4" },
-  { flight:"UA 2297", airline:"United Airlines",    from:"ORD", fromName:"Chicago O'Hare",      to:"LAX", toName:"Los Angeles Intl",      dep:"07:15", arr:"09:50", status:"delayed",   aircraft:"Airbus A320",    gate:"B14", terminal:"1", duration:"4h 35m", baggage:"Carousel 7" },
-  { flight:"AA 2351", airline:"American Airlines",  from:"ORD", fromName:"Chicago O'Hare",      to:"MIA", toName:"Miami Intl",            dep:"08:00", arr:"12:20", status:"on-time",   aircraft:"Boeing 737 MAX", gate:"H11", terminal:"3", duration:"3h 20m", baggage:"Carousel 2" },
-  { flight:"DL 1234", airline:"Delta Air Lines",    from:"ATL", fromName:"Atlanta Hartsfield",  to:"ORD", toName:"Chicago O'Hare",        dep:"09:45", arr:"11:10", status:"on-time",   aircraft:"Boeing 737-900", gate:"E5",  terminal:"2", duration:"2h 25m", baggage:"Carousel 6" },
-  { flight:"WN 4512", airline:"Southwest Airlines", from:"ORD", fromName:"Chicago O'Hare",      to:"DEN", toName:"Denver Intl",           dep:"10:30", arr:"12:15", status:"on-time",   aircraft:"Boeing 737-700", gate:"F7",  terminal:"5", duration:"2h 45m", baggage:"Carousel 1" },
-  { flight:"UA 931",  airline:"United Airlines",    from:"ORD", fromName:"Chicago O'Hare",      to:"LHR", toName:"London Heathrow",       dep:"11:00", arr:"02:10", status:"on-time",   aircraft:"Boeing 777-200", gate:"C18", terminal:"1", duration:"8h 10m", baggage:"Carousel 9" },
-  { flight:"AA 68",   airline:"American Airlines",  from:"ORD", fromName:"Chicago O'Hare",      to:"CDG", toName:"Paris Charles de Gaulle",dep:"12:55",arr:"05:10", status:"delayed",   aircraft:"Boeing 787-9",   gate:"H15", terminal:"3", duration:"9h 15m", baggage:"Carousel 5" },
-  { flight:"UA 837",  airline:"United Airlines",    from:"ORD", fromName:"Chicago O'Hare",      to:"NRT", toName:"Tokyo Narita",          dep:"13:30", arr:"17:05", status:"on-time",   aircraft:"Boeing 777-300", gate:"C22", terminal:"1", duration:"13h 35m",baggage:"Carousel 3" },
-  { flight:"B6 700",  airline:"JetBlue Airways",    from:"ORD", fromName:"Chicago O'Hare",      to:"BOS", toName:"Boston Logan",          dep:"14:10", arr:"17:40", status:"on-time",   aircraft:"Airbus A321",    gate:"F3",  terminal:"5", duration:"2h 30m", baggage:"Carousel 2" },
-  { flight:"F9 1122", airline:"Frontier Airlines",  from:"ORD", fromName:"Chicago O'Hare",      to:"PHX", toName:"Phoenix Sky Harbor",    dep:"15:00", arr:"17:30", status:"cancelled", aircraft:"Airbus A320neo", gate:"—",   terminal:"5", duration:"3h 30m", baggage:"—" },
-  { flight:"AA 471",  airline:"American Airlines",  from:"LAX", fromName:"Los Angeles Intl",    to:"ORD", toName:"Chicago O'Hare",        dep:"08:30", arr:"14:15", status:"landed",    aircraft:"Boeing 737-800", gate:"H8",  terminal:"3", duration:"4h 45m", baggage:"Carousel 4" },
-  { flight:"DL 412",  airline:"Delta Air Lines",    from:"JFK", fromName:"New York JFK",        to:"ORD", toName:"Chicago O'Hare",        dep:"09:20", arr:"11:35", status:"on-time",   aircraft:"Airbus A220",    gate:"E2",  terminal:"2", duration:"2h 15m", baggage:"Carousel 6" },
-  { flight:"UA 519",  airline:"United Airlines",    from:"SFO", fromName:"San Francisco Intl",  to:"ORD", toName:"Chicago O'Hare",        dep:"07:45", arr:"14:20", status:"delayed",   aircraft:"Boeing 737-900", gate:"C5",  terminal:"1", duration:"4h 35m", baggage:"Carousel 8" },
-  { flight:"AA 1800", airline:"American Airlines",  from:"ORD", fromName:"Chicago O'Hare",      to:"SEA", toName:"Seattle-Tacoma",        dep:"16:00", arr:"18:45", status:"on-time",   aircraft:"Boeing 737-800", gate:"H20", terminal:"3", duration:"4h 45m", baggage:"Carousel 3" },
-  { flight:"UA 1145", airline:"United Airlines",    from:"ORD", fromName:"Chicago O'Hare",      to:"CUN", toName:"Cancun Intl",           dep:"07:00", arr:"11:45", status:"on-time",   aircraft:"Boeing 737-700", gate:"C9",  terminal:"1", duration:"3h 45m", baggage:"Carousel 1" },
-  { flight:"AC 763",  airline:"Air Canada",         from:"YYZ", fromName:"Toronto Pearson",     to:"ORD", toName:"Chicago O'Hare",        dep:"10:15", arr:"11:10", status:"on-time",   aircraft:"Embraer E175",   gate:"B4",  terminal:"1", duration:"1h 55m", baggage:"Carousel 5" },
-  { flight:"DL 5678", airline:"Delta Air Lines",    from:"ORD", fromName:"Chicago O'Hare",      to:"ATL", toName:"Atlanta Hartsfield",    dep:"17:30", arr:"21:05", status:"on-time",   aircraft:"Boeing 717",     gate:"E9",  terminal:"2", duration:"1h 35m", baggage:"Carousel 7" },
-  { flight:"AA 999",  airline:"American Airlines",  from:"ORD", fromName:"Chicago O'Hare",      to:"DFW", toName:"Dallas/Fort Worth",     dep:"18:45", arr:"21:30", status:"on-time",   aircraft:"Airbus A319",    gate:"H25", terminal:"3", duration:"2h 45m", baggage:"Carousel 2" },
+let selectedClass = 'business';
+let currentFlight = null;
+
+// ══════════════════════════════════════════════════
+// ALL US AIRLINES
+// ══════════════════════════════════════════════════
+const AIRLINES = [
+  { code:'AA', name:'American Airlines',    hub:'DFW/ORD/JFK', business:'Flagship Business', first:'Flagship First' },
+  { code:'UA', name:'United Airlines',      hub:'ORD/EWR/IAH', business:'Polaris Business',  first:'Polaris First' },
+  { code:'DL', name:'Delta Air Lines',      hub:'ATL/JFK/MSP', business:'Delta One',         first:'Delta One Suite' },
+  { code:'WN', name:'Southwest Airlines',   hub:'DAL/MDW/BWI', business:'Business Select',   first:'Business Select' },
+  { code:'B6', name:'JetBlue Airways',      hub:'JFK/BOS/FLL', business:'Mint Business',     first:'Mint Studio' },
+  { code:'AS', name:'Alaska Airlines',      hub:'SEA/LAX/SFO', business:'First Class',       first:'First Class' },
+  { code:'NK', name:'Spirit Airlines',      hub:'FLL/LAS/DTW', business:'Big Front Seat',    first:'Big Front Seat' },
+  { code:'F9', name:'Frontier Airlines',    hub:'DEN',         business:'UpFront Plus',      first:'UpFront Plus' },
+  { code:'G4', name:'Allegiant Air',        hub:'LAS/SFO',     business:'N/A',               first:'N/A' },
+  { code:'SY', name:'Sun Country Airlines', hub:'MSP',         business:'First Class',       first:'First Class' },
+  { code:'HA', name:'Hawaiian Airlines',    hub:'HNL',         business:'First Class',       first:'First Class' },
+  { code:'AC', name:'Air Canada',           hub:'YYZ/YVR',     business:'Business',          first:'Business' },
+  { code:'MX', name:'Breeze Airways',       hub:'SLC/BDL',     business:'Nicest',            first:'Nicest' },
+  { code:'YX', name:'Republic Airways',     hub:'IND',         business:'First Class',       first:'First Class' },
+  { code:'OO', name:'SkyWest Airlines',     hub:'SLC/LAX',     business:'First Class',       first:'First Class' },
 ];
 
-const IATA = {
-  "chicago":"ORD","o'hare":"ORD","ohare":"ORD","ord":"ORD",
-  "new york":"JFK","jfk":"JFK","lga":"LGA",
+const AIRPORTS = {
+  ORD:{name:"Chicago O'Hare",city:"Chicago"},
+  LAX:{name:"Los Angeles Intl",city:"Los Angeles"},
+  JFK:{name:"New York JFK",city:"New York"},
+  ATL:{name:"Atlanta Hartsfield",city:"Atlanta"},
+  DFW:{name:"Dallas/Fort Worth",city:"Dallas"},
+  DEN:{name:"Denver Intl",city:"Denver"},
+  SFO:{name:"San Francisco Intl",city:"San Francisco"},
+  MIA:{name:"Miami Intl",city:"Miami"},
+  SEA:{name:"Seattle-Tacoma",city:"Seattle"},
+  BOS:{name:"Boston Logan",city:"Boston"},
+  LGA:{name:"New York LaGuardia",city:"New York"},
+  MCO:{name:"Orlando Intl",city:"Orlando"},
+  PHX:{name:"Phoenix Sky Harbor",city:"Phoenix"},
+  LHR:{name:"London Heathrow",city:"London"},
+  CDG:{name:"Paris CDG",city:"Paris"},
+  NRT:{name:"Tokyo Narita",city:"Tokyo"},
+  CUN:{name:"Cancun Intl",city:"Cancun"},
+  YYZ:{name:"Toronto Pearson",city:"Toronto"},
+  EWR:{name:"Newark Liberty",city:"Newark"},
+  IAH:{name:"Houston Intercontinental",city:"Houston"},
+  MSP:{name:"Minneapolis-St. Paul",city:"Minneapolis"},
+  DTW:{name:"Detroit Metro",city:"Detroit"},
+  PHL:{name:"Philadelphia Intl",city:"Philadelphia"},
+  LAS:{name:"Las Vegas Harry Reid",city:"Las Vegas"},
+  CLT:{name:"Charlotte Douglas",city:"Charlotte"},
+  HNL:{name:"Honolulu Daniel K. Inouye",city:"Honolulu"},
+  ANC:{name:"Ted Stevens Anchorage",city:"Anchorage"},
+  FLL:{name:"Fort Lauderdale-Hollywood",city:"Fort Lauderdale"},
+  BWI:{name:"Baltimore/Washington",city:"Baltimore"},
+  MDW:{name:"Chicago Midway",city:"Chicago"},
+};
+
+// ══════════════════════════════════════════════════
+// FLIGHT DATABASE — all classes
+// ══════════════════════════════════════════════════
+const FLIGHTS = [
+  // American Airlines
+  { flight:"AA 100",  airline:"American Airlines",  code:"AA", from:"ORD",to:"JFK",  dep:"06:30",arr:"10:05",status:"on-time",  aircraft:"Boeing 737-800",  gate:"H3",  terminal:"3",duration:"2h 35m",
+    prices:{economy:289,  business:1240, first:2890}, seats:{economy:"32C",business:"8A",first:"2A"}, meals:{economy:"Snack",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"UA 2297", airline:"United Airlines",    code:"UA", from:"ORD",to:"LAX",  dep:"07:15",arr:"09:50",status:"delayed",  aircraft:"Airbus A320",     gate:"B14", terminal:"1",duration:"4h 35m",
+    prices:{economy:219,  business:1890, first:3200}, seats:{economy:"24F",business:"6C",first:"1A"}, meals:{economy:"Buy",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"AA 2351", airline:"American Airlines",  code:"AA", from:"ORD",to:"MIA",  dep:"08:00",arr:"12:20",status:"on-time",  aircraft:"Boeing 737 MAX",  gate:"H11", terminal:"3",duration:"3h 20m",
+    prices:{economy:259,  business:1450, first:2750}, seats:{economy:"28B",business:"7B",first:"2B"}, meals:{economy:"Snack",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"DL 1234", airline:"Delta Air Lines",    code:"DL", from:"ATL",to:"ORD",  dep:"09:45",arr:"11:10",status:"on-time",  aircraft:"Boeing 737-900",  gate:"E5",  terminal:"2",duration:"2h 25m",
+    prices:{economy:199,  business:980,  first:1980}, seats:{economy:"30D",business:"5A",first:"1C"}, meals:{economy:"Snack",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"WN 4512", airline:"Southwest Airlines", code:"WN", from:"ORD",to:"DEN",  dep:"10:30",arr:"12:15",status:"on-time",  aircraft:"Boeing 737-700",  gate:"F7",  terminal:"5",duration:"2h 45m",
+    prices:{economy:149,  business:299,  first:299},  seats:{economy:"Open",business:"Front Row",first:"Front Row"}, meals:{economy:"Snacks",business:"Snacks",first:"Snacks"} },
+  { flight:"UA 931",  airline:"United Airlines",    code:"UA", from:"ORD",to:"LHR",  dep:"11:00",arr:"02:10",status:"on-time",  aircraft:"Boeing 777-200",  gate:"C18", terminal:"1",duration:"8h 10m",
+    prices:{economy:689,  business:4200, first:8900}, seats:{economy:"42A",business:"10A",first:"1A"}, meals:{economy:"Full Meal",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"AA 68",   airline:"American Airlines",  code:"AA", from:"ORD",to:"CDG",  dep:"12:55",arr:"05:10",status:"delayed",  aircraft:"Boeing 787-9",    gate:"H15", terminal:"3",duration:"9h 15m",
+    prices:{economy:749,  business:4800, first:9500}, seats:{economy:"38C",business:"9B",first:"1B"}, meals:{economy:"Full Meal",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"UA 837",  airline:"United Airlines",    code:"UA", from:"ORD",to:"NRT",  dep:"13:30",arr:"17:05",status:"on-time",  aircraft:"Boeing 777-300",  gate:"C22", terminal:"1",duration:"13h 35m",
+    prices:{economy:899,  business:5600, first:11200},seats:{economy:"45B",business:"12A",first:"1A"}, meals:{economy:"Full Meal",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"B6 700",  airline:"JetBlue Airways",    code:"B6", from:"ORD",to:"BOS",  dep:"14:10",arr:"17:40",status:"on-time",  aircraft:"Airbus A321",     gate:"F3",  terminal:"5",duration:"2h 30m",
+    prices:{economy:179,  business:890,  first:890},  seats:{economy:"26A",business:"4A",first:"4A"}, meals:{economy:"Snacks",business:"Mint Dining",first:"Mint Dining"} },
+  { flight:"AS 320",  airline:"Alaska Airlines",    code:"AS", from:"SEA",to:"LAX",  dep:"08:00",arr:"10:40",status:"on-time",  aircraft:"Boeing 737-900",  gate:"N12", terminal:"N",duration:"2h 40m",
+    prices:{economy:169,  business:620,  first:620},  seats:{economy:"28C",business:"3B",first:"3B"}, meals:{economy:"Buy",business:"Full Service",first:"Full Service"} },
+  { flight:"DL 412",  airline:"Delta Air Lines",    code:"DL", from:"JFK",to:"ORD",  dep:"09:20",arr:"11:35",status:"on-time",  aircraft:"Airbus A220",     gate:"E2",  terminal:"2",duration:"2h 15m",
+    prices:{economy:189,  business:920,  first:1850}, seats:{economy:"31A",business:"6B",first:"1B"}, meals:{economy:"Snack",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"AA 471",  airline:"American Airlines",  code:"AA", from:"LAX",to:"ORD",  dep:"08:30",arr:"14:15",status:"landed",   aircraft:"Boeing 737-800",  gate:"H8",  terminal:"3",duration:"4h 45m",
+    prices:{economy:229,  business:1320, first:2650}, seats:{economy:"33D",business:"7A",first:"2A"}, meals:{economy:"Snack",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"UA 519",  airline:"United Airlines",    code:"UA", from:"SFO",to:"ORD",  dep:"07:45",arr:"14:20",status:"delayed",  aircraft:"Boeing 737-900",  gate:"C5",  terminal:"1",duration:"4h 35m",
+    prices:{economy:239,  business:1780, first:3100}, seats:{economy:"29E",business:"8C",first:"1C"}, meals:{economy:"Buy",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"AA 1800", airline:"American Airlines",  code:"AA", from:"ORD",to:"SEA",  dep:"16:00",arr:"18:45",status:"on-time",  aircraft:"Boeing 737-800",  gate:"H20", terminal:"3",duration:"4h 45m",
+    prices:{economy:209,  business:1100, first:2200}, seats:{economy:"27B",business:"6A",first:"2C"}, meals:{economy:"Snack",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"DL 5678", airline:"Delta Air Lines",    code:"DL", from:"ORD",to:"ATL",  dep:"17:30",arr:"21:05",status:"on-time",  aircraft:"Boeing 717",      gate:"E9",  terminal:"2",duration:"1h 35m",
+    prices:{economy:159,  business:720,  first:1450}, seats:{economy:"22C",business:"4B",first:"1A"}, meals:{economy:"Snack",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"AA 999",  airline:"American Airlines",  code:"AA", from:"ORD",to:"DFW",  dep:"18:45",arr:"21:30",status:"on-time",  aircraft:"Airbus A319",     gate:"H25", terminal:"3",duration:"2h 45m",
+    prices:{economy:179,  business:980,  first:1960}, seats:{economy:"25A",business:"5C",first:"2B"}, meals:{economy:"Snack",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"UA 1145", airline:"United Airlines",    code:"UA", from:"ORD",to:"CUN",  dep:"07:00",arr:"11:45",status:"on-time",  aircraft:"Boeing 737-700",  gate:"C9",  terminal:"1",duration:"3h 45m",
+    prices:{economy:299,  business:1200, first:2400}, seats:{economy:"30B",business:"7B",first:"1B"}, meals:{economy:"Snack",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"HA 55",   airline:"Hawaiian Airlines",  code:"HA", from:"LAX",to:"HNL",  dep:"09:15",arr:"12:40",status:"on-time",  aircraft:"Airbus A330-200", gate:"B22", terminal:"B",duration:"5h 25m",
+    prices:{economy:349,  business:1800, first:3600}, seats:{economy:"36C",business:"10A",first:"2A"}, meals:{economy:"Full Meal",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"AS 7",    airline:"Alaska Airlines",    code:"AS", from:"SEA",to:"MIA",  dep:"06:45",arr:"15:20",status:"on-time",  aircraft:"Boeing 737-900ER",gate:"S14", terminal:"S",duration:"8h 35m",
+    prices:{economy:289,  business:980,  first:980},  seats:{economy:"28A",business:"3A",first:"3A"}, meals:{economy:"Buy",business:"Full Service",first:"Full Service"} },
+  { flight:"F9 1122", airline:"Frontier Airlines",  code:"F9", from:"ORD",to:"PHX",  dep:"15:00",arr:"17:30",status:"cancelled",aircraft:"Airbus A320neo",  gate:"—",   terminal:"5",duration:"3h 30m",
+    prices:{economy:89,   business:189,  first:189},  seats:{economy:"—",  business:"—",   first:"—"},  meals:{economy:"Buy",business:"Buy",first:"Buy"} },
+  { flight:"B6 915",  airline:"JetBlue Airways",    code:"B6", from:"JFK",to:"LAX",  dep:"08:00",arr:"11:30",status:"on-time",  aircraft:"Airbus A321",     gate:"T5",  terminal:"5",duration:"5h 30m",
+    prices:{economy:249,  business:1450, first:1450}, seats:{economy:"24B",business:"3A",first:"3A"}, meals:{economy:"Snacks",business:"Mint Dining",first:"Mint Dining"} },
+  { flight:"DL 201",  airline:"Delta Air Lines",    code:"DL", from:"JFK",to:"LHR",  dep:"22:00",arr:"10:15",status:"on-time",  aircraft:"Boeing 767-400",  gate:"T4",  terminal:"4",duration:"7h 15m",
+    prices:{economy:699,  business:4500, first:9000}, seats:{economy:"40C",business:"11A",first:"1A"}, meals:{economy:"Full Meal",business:"Full Service",first:"Chef's Menu"} },
+  { flight:"AA 50",   airline:"American Airlines",  code:"AA", from:"JFK",to:"CDG",  dep:"21:30",arr:"11:05",status:"on-time",  aircraft:"Boeing 777-200",  gate:"T8",  terminal:"8",duration:"7h 35m",
+    prices:{economy:749,  business:5200, first:10400},seats:{economy:"42A",business:"8B",first:"1A"}, meals:{economy:"Full Meal",business:"Full Service",first:"Chef's Menu"} },
+];
+
+const IATA_MAP = {
+  "chicago":"ORD","o'hare":"ORD","ohare":"ORD","midway":"MDW",
+  "new york":"JFK","jfk":"JFK","lga":"LGA","newark":"EWR","ewr":"EWR",
   "los angeles":"LAX","lax":"LAX",
   "atlanta":"ATL","atl":"ATL",
   "denver":"DEN","den":"DEN",
@@ -760,35 +1170,106 @@ const IATA = {
   "toronto":"YYZ","yyz":"YYZ",
   "san francisco":"SFO","sfo":"SFO",
   "dallas":"DFW","dfw":"DFW",
+  "houston":"IAH","iah":"IAH",
+  "honolulu":"HNL","hnl":"HNL","hawaii":"HNL",
+  "minneapolis":"MSP","msp":"MSP",
+  "detroit":"DTW","dtw":"DTW",
+  "philadelphia":"PHL","phl":"PHL",
+  "las vegas":"LAS","las":"LAS",
+  "charlotte":"CLT","clt":"CLT",
+  "orlando":"MCO","mco":"MCO",
+  "anchorage":"ANC","anc":"ANC","alaska":"ANC",
+  "fort lauderdale":"FLL","fll":"FLL",
+  "baltimore":"BWI","bwi":"BWI",
 };
 
-let currentFlight = null;
+// ══════════════════════════════════════════════════
+// CLASS PERKS
+// ══════════════════════════════════════════════════
+const PERKS = {
+  economy: [
+    {icon:"🧳", label:"1 Carry-on"},
+    {icon:"🎵", label:"In-flight Entertainment"},
+    {icon:"🔌", label:"USB Power"},
+  ],
+  business: [
+    {icon:"🛋", label:"Lie-flat Seat", gold:true},
+    {icon:"🍷", label:"Premium Dining", gold:true},
+    {icon:"🎧", label:"Noise-canceling Headphones", gold:true},
+    {icon:"🧳", label:"2 Checked Bags"},
+    {icon:"⚡", label:"Priority Boarding"},
+    {icon:"🛂", label:"Fast Track Security"},
+  ],
+  first: [
+    {icon:"✦", label:"Private Suite", plat:true},
+    {icon:"👨‍🍳", label:"À la Carte Dining", plat:true},
+    {icon:"🛏", label:"Turndown Service", plat:true},
+    {icon:"🥂", label:"Champagne On Demand", plat:true},
+    {icon:"🧳", label:"3 Checked Bags"},
+    {icon:"🚗", label:"Chauffeur Transfer"},
+  ],
+};
 
 // ══════════════════════════════════════════════════
-// FIND FLIGHT (AI-powered)
+// CLASS SELECTOR
+// ══════════════════════════════════════════════════
+function setClass(cls) {
+  selectedClass = cls;
+  ['economy','business','first'].forEach(c => {
+    const btn = document.getElementById('btn-'+c);
+    btn.className = 'class-btn';
+    if (c === cls) btn.classList.add('active-'+c);
+  });
+  const badge = document.getElementById('class-badge');
+  badge.className = 'selected-class-badge badge-'+cls;
+  const labels = {economy:'Economy Class', business:'Business Class', first:'First Class'};
+  badge.textContent = labels[cls];
+}
+
+setClass('business');
+
+// ══════════════════════════════════════════════════
+// RENDER AIRLINES
+// ══════════════════════════════════════════════════
+const grid = document.getElementById('airlines-grid');
+AIRLINES.forEach(a => {
+  const el = document.createElement('div');
+  el.className = 'airline-item';
+  el.innerHTML = `<div class="airline-code">${a.code}</div><div class="airline-name-sm">${a.name}</div>`;
+  el.onclick = () => {
+    document.getElementById('flight-input').value = a.name + ' ';
+    document.getElementById('flight-input').focus();
+  };
+  grid.appendChild(el);
+});
+
+// ══════════════════════════════════════════════════
+// FIND FLIGHT
 // ══════════════════════════════════════════════════
 async function findFlight() {
   const input = document.getElementById('flight-input').value.trim();
-  if (!input) { showToast('Please enter some flight information first'); return; }
+  if (!input) { showToast('Please enter flight information'); return; }
 
   hideAll();
   document.getElementById('loader').classList.add('visible');
   document.getElementById('find-btn').disabled = true;
 
-  const loaderMsgs = [
-    'Parsing your information...',
-    'Extracting flight details...',
-    'Matching against flight database...',
-    'Building tracking link...'
+  const steps = [
+    ['Parsing your request...', 'Extracting flight details'],
+    ['Matching airlines...', 'Checking US carriers'],
+    ['Finding best match...', 'Comparing routes and times'],
+    ['Building tracking link...', 'Almost ready'],
   ];
-  let msgIdx = 0;
-  const msgTimer = setInterval(() => {
-    msgIdx = (msgIdx + 1) % loaderMsgs.length;
-    document.getElementById('loader-sub').textContent = loaderMsgs[msgIdx];
+
+  let si = 0;
+  const timer = setInterval(() => {
+    si = (si+1) % steps.length;
+    document.getElementById('loader-text').textContent = steps[si][0];
+    document.getElementById('loader-sub').textContent  = steps[si][1];
   }, 900);
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -796,118 +1277,75 @@ async function findFlight() {
         max_tokens: 1000,
         messages: [{
           role: 'user',
-          content: `You are a flight data extraction engine. A user has provided flight information. Extract structured data from it and match it to the most likely flight from our database.
+          content: `You are a flight matching engine. Match user input to the best flight from the database.
 
 USER INPUT: "${input}"
+SELECTED CLASS: ${selectedClass}
 
-AVAILABLE FLIGHTS DATABASE (JSON):
+FLIGHTS DATABASE:
 ${JSON.stringify(FLIGHTS.map(f => ({ flight: f.flight, airline: f.airline, from: f.from, to: f.to, dep: f.dep })))}
 
-AIRPORT CODES:
-chicago/o'hare=ORD, new york=JFK, los angeles=LAX, atlanta=ATL, denver=DEN, london/heathrow=LHR, paris=CDG, tokyo/narita=NRT, boston=BOS, phoenix=PHX, miami=MIA, seattle=SEA, cancun=CUN, toronto=YYZ, san francisco=SFO, dallas=DFW
+AIRLINES: American=AA, United=UA, Delta=DL, Southwest=WN, JetBlue=B6, Alaska=AS, Frontier=F9, Hawaiian=HA
+AIRPORTS: chicago/ord=ORD, new york/jfk=JFK, los angeles/lax=LAX, atlanta=ATL, denver=DEN, london=LHR, paris=CDG, tokyo=NRT, boston=BOS, phoenix=PHX, miami=MIA, seattle=SEA, cancun=CUN, toronto=YYZ, san francisco=SFO, dallas=DFW, honolulu/hawaii=HNL
+CLASS KEYWORDS: "polaris"=business united, "flagship"=business/first american, "delta one"=business delta, "mint"=business jetblue
 
-TASK: Identify the best matching flight from the database. Return ONLY valid JSON, no markdown, no explanation:
+Return ONLY valid JSON:
+{"matched":true,"flight":"AA 100","confidence":"high","reason":"brief reason"}
+or
+{"matched":false,"reason":"why not found"}
 
-{
-  "matched": true or false,
-  "flight": "exact flight code from database like AA 100",
-  "confidence": "high/medium/low",
-  "reason": "brief explanation of why this flight was matched"
-}
-
-If no flight matches at all, return {"matched": false, "reason": "explanation"}.
-Return ONLY the JSON object. No backticks, no markdown.`
+No markdown, no backticks. Only JSON.`
         }]
       })
     });
 
-    const data = await response.json();
-    clearInterval(msgTimer);
+    const data = await res.json();
+    clearInterval(timer);
+    const text = data.content.map(c => c.text||'').join('').trim().replace(/```json|```/g,'').trim();
+    const parsed = JSON.parse(text);
 
-    const text = data.content.map(c => c.text || '').join('').trim();
-    let parsed;
-    try {
-      const clean = text.replace(/```json|```/g, '').trim();
-      parsed = JSON.parse(clean);
-    } catch(e) {
-      throw new Error('Could not parse AI response');
-    }
+    if (!parsed.matched) { showError(parsed.reason || 'No matching flight found.'); return; }
 
-    if (!parsed.matched) {
-      showError(parsed.reason || 'No matching flight found in the database.');
-      return;
-    }
+    const match = FLIGHTS.find(f => f.flight === parsed.flight) || fuzzyFallback(input);
+    if (match) renderResult(match);
+    else showError('Flight identified but not found in database. Try a more specific query.');
 
-    const match = FLIGHTS.find(f => f.flight === parsed.flight);
-    if (!match) {
-      // Fuzzy fallback
-      const fallback = fuzzyMatch(input);
-      if (fallback) renderResult(fallback);
-      else showError('Flight identified but could not be found in database. Try a more specific flight number.');
-      return;
-    }
-
-    renderResult(match);
-  } catch(err) {
-    clearInterval(msgTimer);
-    // Fallback: client-side fuzzy match
-    const fallback = fuzzyMatch(input);
+  } catch(e) {
+    clearInterval(timer);
+    const fallback = fuzzyFallback(input);
     if (fallback) renderResult(fallback);
-    else showError('Unable to process your request. Please check your connection and try again.');
+    else showError('Unable to process your request. Please try again.');
   } finally {
     document.getElementById('find-btn').disabled = false;
     document.getElementById('loader').classList.remove('visible');
   }
 }
 
-// ── CLIENT-SIDE FUZZY FALLBACK ──
-function fuzzyMatch(input) {
+function fuzzyFallback(input) {
   const q = input.toLowerCase();
-
-  // Direct flight number match
   for (const f of FLIGHTS) {
     const code = f.flight.replace(/\s/,'').toLowerCase();
     if (q.includes(code) || q.includes(f.flight.toLowerCase())) return f;
   }
+  const airlineMap = {'american':'AA','united':'UA','delta':'DL','southwest':'WN','jetblue':'B6','alaska':'AS','frontier':'F9','hawaiian':'HA'};
+  let airCode = null;
+  for (const [n,c] of Object.entries(airlineMap)) { if (q.includes(n)) { airCode = c; break; } }
 
-  // Airline + route match
-  const airlineMap = {
-    'american':'AA','united':'UA','delta':'DL','southwest':'WN',
-    'jetblue':'B6','frontier':'F9','air canada':'AC'
-  };
-
-  let airlineCode = null;
-  for (const [name, code] of Object.entries(airlineMap)) {
-    if (q.includes(name)) { airlineCode = code; break; }
+  let from = null, to = null;
+  for (const [kw, code] of Object.entries(IATA_MAP)) {
+    if (q.includes(kw)) { if (!from) from = code; else if (code !== from) { to = code; break; } }
   }
 
-  // Detect airports
-  let fromCode = null, toCode = null;
-  for (const [keyword, code] of Object.entries(IATA)) {
-    if (q.includes(keyword)) {
-      if (!fromCode) fromCode = code;
-      else if (code !== fromCode) { toCode = code; break; }
-    }
+  if (from && to) {
+    const route = FLIGHTS.filter(f => f.from === from && f.to === to);
+    if (airCode) { const m = route.find(f => f.code === airCode); if (m) return m; }
+    if (route.length) return route[0];
   }
-
-  if (fromCode && toCode) {
-    const routeMatches = FLIGHTS.filter(f => f.from === fromCode && f.to === toCode);
-    if (airlineCode) {
-      const airlineMatch = routeMatches.find(f => f.flight.startsWith(airlineCode));
-      if (airlineMatch) return airlineMatch;
-    }
-    if (routeMatches.length > 0) return routeMatches[0];
+  if (from) {
+    const dep = FLIGHTS.filter(f => f.from === from);
+    if (airCode) { const m = dep.find(f => f.code === airCode); if (m) return m; }
+    if (dep.length) return dep[0];
   }
-
-  if (fromCode) {
-    const depMatch = FLIGHTS.filter(f => f.from === fromCode);
-    if (airlineCode) {
-      const am = depMatch.find(f => f.flight.startsWith(airlineCode));
-      if (am) return am;
-    }
-    if (depMatch.length > 0) return depMatch[0];
-  }
-
   return null;
 }
 
@@ -916,82 +1354,106 @@ function fuzzyMatch(input) {
 // ══════════════════════════════════════════════════
 function renderResult(f) {
   currentFlight = f;
+  const cls = selectedClass;
 
   document.getElementById('r-flight').textContent   = f.flight;
-  document.getElementById('r-airline').textContent  = f.airline + ' · Economy';
-  document.getElementById('r-from-code').textContent = f.from;
-  document.getElementById('r-from-name').textContent = f.fromName;
-  document.getElementById('r-dep-time').textContent  = f.dep;
-  document.getElementById('r-to-code').textContent   = f.to;
-  document.getElementById('r-to-name').textContent   = f.toName;
-  document.getElementById('r-arr-time').textContent  = f.arr;
-  document.getElementById('r-duration').textContent  = f.duration;
-  document.getElementById('r-aircraft').textContent  = f.aircraft;
-  document.getElementById('r-gate').textContent      = f.gate;
-  document.getElementById('r-terminal').textContent  = f.terminal;
-  document.getElementById('r-flighttime').textContent= f.duration;
-  document.getElementById('r-baggage').textContent   = f.baggage;
-  document.getElementById('r-class').textContent     = 'Economy';
+  document.getElementById('r-airline').textContent  = f.airline;
+  document.getElementById('r-from').textContent     = f.from;
+  document.getElementById('r-from-city').textContent= (AIRPORTS[f.from]?.city || f.from);
+  document.getElementById('r-dep').textContent      = f.dep;
+  document.getElementById('r-to').textContent       = f.to;
+  document.getElementById('r-to-city').textContent  = (AIRPORTS[f.to]?.city || f.to);
+  document.getElementById('r-arr').textContent      = f.arr;
+  document.getElementById('r-duration').textContent = f.duration;
+  document.getElementById('r-aircraft').textContent = f.aircraft;
+  document.getElementById('r-gate').textContent     = f.gate;
+  document.getElementById('r-terminal').textContent = f.terminal;
+  document.getElementById('r-baggage').textContent  = f.baggage || 'Carousel —';
+  document.getElementById('r-seat').textContent     = f.seats[cls] || '—';
+  document.getElementById('r-meal').textContent     = f.meals[cls] === 'Chef\'s Menu' ? '🍾' : f.meals[cls] === 'Full Service' ? '🍽' : f.meals[cls] === 'Mint Dining' ? '🥗' : '🧃';
 
-  const statusMap = { 'on-time':'On Time','delayed':'Delayed','landed':'Landed','cancelled':'Cancelled' };
-  const pill = document.getElementById('r-status-pill');
-  pill.textContent = statusMap[f.status] || f.status;
-  pill.className = 'status-pill ' + f.status;
+  // Price
+  const price = f.prices[cls];
+  document.getElementById('r-price').textContent = price ? `$${price.toLocaleString()}` : 'N/A';
+  const priceNotes = {economy:'Economy — best value', business:'Business — premium comfort', first:'First Class — ultimate luxury'};
+  document.getElementById('r-price-note').textContent = priceNotes[cls];
 
+  // Status
+  const statusTag = document.getElementById('r-status-tag');
+  const statusLabels = {'on-time':'On Time','delayed':'Delayed','landed':'Landed','cancelled':'Cancelled'};
+  statusTag.textContent = statusLabels[f.status] || f.status;
+  statusTag.className = 'status-tag status-' + f.status;
+
+  // Class tag
+  const classTag = document.getElementById('r-class-tag');
+  const airline = AIRLINES.find(a => a.code === f.code);
+  const classNames = {
+    economy: 'Economy',
+    business: airline?.business || 'Business Class',
+    first: airline?.first || 'First Class'
+  };
+  classTag.textContent = classNames[cls];
+  classTag.className = 'class-tag class-tag-' + cls;
+
+  // Perks
+  const perksContainer = document.getElementById('r-perks');
+  perksContainer.innerHTML = PERKS[cls].map(p =>
+    `<div class="perk ${p.gold?'gold':''} ${p.plat?'platinum':''}">
+      <span class="perk-icon">${p.icon}</span>${p.label}
+    </div>`
+  ).join('');
+
+  // Share URL
   const code = f.flight.replace(/\s+/g,'').toUpperCase();
   const shareUrl = `https://flightaware.com/live/flight/${code}`;
   document.getElementById('r-share-url').textContent = shareUrl;
 
+  // Card class styling
+  const card = document.getElementById('result-card');
+  card.className = 'result-card visible class-' + cls;
+
   hideAll();
-  document.getElementById('result-card').classList.add('visible');
-  document.getElementById('result-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  card.style.display = 'block';
+  card.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ══════════════════════════════════════════════════
-// SHARE ACTIONS
+// SHARE
 // ══════════════════════════════════════════════════
-function copyShareUrl() {
+function copyUrl() {
   const url = document.getElementById('r-share-url').textContent;
   if (!url || url === '—') return;
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(() => {
-      const btn = document.getElementById('copy-btn');
-      btn.textContent = '✓ Copied!';
-      btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
-      showToast('🔗 Tracking link copied to clipboard!');
-    });
-  }
+  navigator.clipboard?.writeText(url).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    showToast('Tracking link copied to clipboard');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
+  });
 }
 
 function openFlightAware() {
   if (!currentFlight) return;
-  const code = currentFlight.flight.replace(/\s+/g,'').toUpperCase();
-  window.open(`https://flightaware.com/live/flight/${code}`, '_blank');
+  window.open(`https://flightaware.com/live/flight/${currentFlight.flight.replace(/\s+/g,'')}`, '_blank');
 }
 
 function openFlightRadar() {
   if (!currentFlight) return;
-  const code = currentFlight.flight.replace(/\s+/g,'').toUpperCase();
-  window.open(`https://www.flightradar24.com/${code}`, '_blank');
+  window.open(`https://www.flightradar24.com/${currentFlight.flight.replace(/\s+/g,'')}`, '_blank');
 }
 
-function shareViaAPI() {
+function nativeShare() {
   const url = document.getElementById('r-share-url').textContent;
-  if (!url || url === '—') return;
-  if (navigator.share) {
-    navigator.share({ title: `Track Flight ${currentFlight?.flight}`, url });
-  } else {
-    copyShareUrl();
-    showToast('Link copied — paste it anywhere to share!');
-  }
+  if (navigator.share) navigator.share({ title: `Track ${currentFlight?.flight}`, url });
+  else { copyUrl(); }
 }
 
 // ══════════════════════════════════════════════════
-// HELPERS
+// UTILS
 // ══════════════════════════════════════════════════
 function hideAll() {
   document.getElementById('result-card').classList.remove('visible');
+  document.getElementById('result-card').style.display = 'none';
   document.getElementById('error-card').classList.remove('visible');
   document.getElementById('loader').classList.remove('visible');
 }
@@ -1016,7 +1478,6 @@ function showToast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-// Enter key shortcut
 document.getElementById('flight-input').addEventListener('keydown', e => {
   if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) findFlight();
 });
