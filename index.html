@@ -1405,7 +1405,7 @@ function renderResult(f) {
 
   // Share URL
   const code = f.flight.replace(/\s+/g,'').toUpperCase();
-  const shareUrl = `https://flightaware.com/live/flight/${code}`;
+  const shareUrl = `https://flightaware.com/live/findflight/?origin=${f.from}&destination=${f.to}`;
   document.getElementById('r-share-url').textContent = shareUrl;
 
   // Card class styling
