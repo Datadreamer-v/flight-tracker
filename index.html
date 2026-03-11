@@ -1154,7 +1154,7 @@ const FLIGHTS = [
 ];
 
 const IATA_MAP = {
-  "chicago":"ORD","new orleans":"MSY","msy":"MSY","brownsville":"BRO","bro":"BRO","nashville":"BNA","bna":"BNA","memphis":"MEM","mem":"MEM","tulsa":"TUL","tul":"TUL","oklahoma city":"OKC","okc":"OKC","raleigh":"RDU","rdu":"RDU","pittsburgh":"PIT","pit":"PIT","richmond":"RIC","ric":"RIC","norfolk":"ORF","orf":"ORF","jackson hole":"JAC","jac":"JAC","juneau":"JNU","jnu":"JNU","anchorage":"ANC","o'hare":"ORD","ohare":"ORD","midway":"MDW",
+  "chicago":"ORD","o'hare":"ORD","ohare":"ORD","midway":"MDW",
   "new york":"JFK","jfk":"JFK","lga":"LGA","newark":"EWR","ewr":"EWR",
   "los angeles":"LAX","lax":"LAX",
   "atlanta":"ATL","atl":"ATL",
@@ -1405,7 +1405,7 @@ function renderResult(f) {
 
   // Share URL
   const code = f.flight.replace(/\s+/g,'').toUpperCase();
-  const shareUrl = `https://flightaware.com/live/findflight/?origin=${f.from}&destination=${f.to}`;
+  const shareUrl = `https://flightaware.com/live/flight/${code}`;
   document.getElementById('r-share-url').textContent = shareUrl;
 
   // Card class styling
