@@ -158,6 +158,77 @@ nav{position:sticky;top:0;z-index:100;background:rgba(12,12,14,.92);backdrop-fil
 .dp-a:hover{border-color:var(--gold-dim);color:var(--gold)}
 .dp-a.primary{background:var(--gold);border-color:var(--gold);color:#0c0c0e;font-weight:600}
 .dp-a.primary:hover{background:var(--gold-light)}
+.dp-a.ticket{background:rgba(155,89,182,.12);border-color:rgba(155,89,182,.4);color:#c39bd3;font-weight:600}
+.dp-a.ticket:hover{background:rgba(155,89,182,.22);color:#d7bde2}
+
+/* TICKET MODAL */
+.tk-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:300;align-items:flex-start;justify-content:center;overflow-y:auto;padding:2rem 1rem}
+.tk-bg.open{display:flex}
+.tk-wrap{width:100%;max-width:700px;margin:auto}
+.tk-editor{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem;position:relative}
+.tk-editor::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#9b59b6,transparent)}
+.tk-ed-title{font-family:var(--serif);font-size:1.3rem;color:var(--gold);margin-bottom:1rem}
+.tk-fields{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1rem}
+.tk-field{display:flex;flex-direction:column;gap:.3rem}
+.tk-field label{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.tk-field input,.tk-field select{background:var(--surface);border:1px solid var(--border);color:var(--white);padding:.6rem .85rem;border-radius:7px;font-family:var(--sans);font-size:.82rem;outline:none;transition:border-color .2s}
+.tk-field input:focus,.tk-field select:focus{border-color:var(--gold)}
+.tk-field select option{background:var(--card)}
+.tk-btns{display:flex;gap:.6rem;flex-wrap:wrap}
+.tk-gen{background:var(--gold);color:#0c0c0e;border:none;padding:.65rem 1.6rem;border-radius:7px;font-weight:600;font-size:.78rem;cursor:pointer;font-family:var(--sans);letter-spacing:.08em}
+.tk-gen:hover{background:var(--gold-light)}
+.tk-print{background:none;border:1px solid var(--border);color:var(--silver);padding:.65rem 1.2rem;border-radius:7px;font-size:.78rem;cursor:pointer;font-family:var(--sans)}
+.tk-print:hover{border-color:var(--gold-dim);color:var(--gold)}
+.tk-close2{background:none;border:1px solid var(--border);color:var(--muted);padding:.65rem 1.2rem;border-radius:7px;font-size:.78rem;cursor:pointer;font-family:var(--sans)}
+
+/* BOARDING PASS */
+.bp{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6);font-family:'Jost',sans-serif}
+.bp-strip{height:8px;background:linear-gradient(90deg,#1a1a2e,#c9a84c,#1a1a2e)}
+.bp-main{display:flex;min-height:200px}
+.bp-left{flex:1;padding:1.8rem 2rem;background:#fff;position:relative}
+.bp-right{width:155px;background:#f9f7f2;border-left:2px dashed #e0dbd0;padding:1.4rem 1.1rem;display:flex;flex-direction:column;gap:.65rem;position:relative}
+.bp-right::before,.bp-right::after{content:'';position:absolute;left:-13px;width:26px;height:26px;background:var(--bg);border-radius:50%;z-index:1}
+.bp-right::before{top:-13px}
+.bp-right::after{bottom:-13px}
+.bp-airline-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.bp-airline{font-size:1rem;font-weight:700;color:#1a1a2e;letter-spacing:.02em}
+.bp-cbadge{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .65rem;border-radius:20px}
+.cec{background:#e8f5ff;color:#1a6fa8}
+.cbc{background:#fffbe6;color:#b8860b}
+.cfc{background:#fdf2ff;color:#7b2fbe}
+.bp-route{display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem}
+.bp-ap{display:flex;flex-direction:column}
+.bp-iata{font-size:2.6rem;font-weight:800;color:#1a1a2e;line-height:1;letter-spacing:-.02em}
+.bp-city{font-size:.6rem;color:#999;margin-top:.15rem}
+.bp-time{font-size:.95rem;font-weight:600;color:#333;margin-top:.25rem}
+.bp-mid{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem}
+.bp-midline{width:100%;height:1px;background:linear-gradient(90deg,transparent,#ccc,transparent);position:relative}
+.bp-midline::after{content:'✈';position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-size:.85rem;color:#c9a84c;background:#fff;padding:0 .25rem}
+.bp-middur{font-size:.58rem;color:#bbb;letter-spacing:.08em;margin-top:.2rem}
+.bp-pax{margin-bottom:.9rem}
+.bp-pax-lbl{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:#bbb;margin-bottom:.2rem}
+.bp-pax-name{font-size:1.05rem;font-weight:700;color:#1a1a2e;letter-spacing:.05em;text-transform:uppercase}
+.bp-details{display:flex;gap:1.2rem;flex-wrap:wrap}
+.bp-di{display:flex;flex-direction:column;gap:.15rem}
+.bp-di-lbl{font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:#bbb}
+.bp-di-val{font-size:.8rem;font-weight:600;color:#333}
+.bp-stub-lbl{font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:#bbb;margin-bottom:.2rem}
+.bp-stub-val{font-size:.76rem;font-weight:600;color:#555}
+.bp-barcode{margin-top:auto;padding-top:.8rem}
+.bp-bars{display:flex;gap:2px;align-items:flex-end;height:38px}
+.bp-bars span{background:#1a1a2e;border-radius:1px;display:inline-block}
+.bp-bottom{background:#1a1a2e;padding:.7rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.bp-bot-flight{font-size:.7rem;color:rgba(255,255,255,.45);letter-spacing:.1em}
+.bp-bot-logo{font-family:'Cormorant Garamond',Georgia,serif;font-size:1rem;color:#c9a84c;font-weight:600}
+.bp-bot-logo span{color:rgba(255,255,255,.5);font-weight:300}
+.bp-bot-url{font-size:.58rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
+
+@media print{
+  body>*:not(.tk-bg){display:none!important}
+  .tk-bg{background:#fff!important;padding:0!important;position:static!important;display:block!important}
+  .tk-editor,.tk-btns{display:none!important}
+  .bp{box-shadow:none}
+}
 
 /* NO RESULTS */
 .nores{text-align:center;padding:2.5rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
@@ -188,7 +259,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(12,12,14,.92);backdrop-fil
   <div class="modal">
     <div class="modal-title">Connect Live Flight Data</div>
     <div class="modal-desc">
-      AviationStack gives you <strong>real scheduled & upcoming flights</strong> — free tier is 500 calls/month, no credit card needed.
+      AviationStack gives you <strong>real scheduled &amp; upcoming flights</strong> — free tier is 500 calls/month, no credit card needed.
     </div>
     <ol class="modal-steps">
       <li>Visit <a href="https://aviationstack.com/signup/free" target="_blank">aviationstack.com/signup/free</a></li>
@@ -199,9 +270,52 @@ nav{position:sticky;top:0;z-index:100;background:rgba(12,12,14,.92);backdrop-fil
     <div class="m-status" id="mstatus"></div>
     <input class="modal-input" id="akey" placeholder="Your AviationStack API key…" type="text" autocomplete="off">
     <div class="modal-actions">
-      <button class="m-save" onclick="saveKey()">Save & Connect</button>
+      <button class="m-save" onclick="saveKey()">Save &amp; Connect</button>
       <button class="m-cancel" onclick="closeMod()">Cancel</button>
     </div>
+  </div>
+</div>
+
+<!-- TICKET MODAL -->
+<div class="tk-bg" id="tkbg">
+  <div class="tk-wrap">
+    <div class="tk-editor">
+      <div class="tk-ed-title">✦ Generate Boarding Pass</div>
+      <div class="tk-fields">
+        <div class="tk-field" style="grid-column:1/-1">
+          <label>Passenger Full Name</label>
+          <input id="tk-name" placeholder="e.g. JOHN A SMITH" oninput="updateTicket()">
+        </div>
+        <div class="tk-field">
+          <label>Seat Number</label>
+          <input id="tk-seat" placeholder="e.g. 14C" oninput="updateTicket()">
+        </div>
+        <div class="tk-field">
+          <label>Booking Reference</label>
+          <input id="tk-pnr" placeholder="e.g. XK9F2A" oninput="updateTicket()">
+        </div>
+        <div class="tk-field">
+          <label>Boarding Group</label>
+          <select id="tk-group" onchange="updateTicket()">
+            <option>Group 1</option><option>Group 2</option><option>Group 3</option>
+            <option>Priority</option><option>Pre-Board</option>
+          </select>
+        </div>
+        <div class="tk-field">
+          <label>Meal Preference</label>
+          <select id="tk-meal" onchange="updateTicket()">
+            <option>Standard</option><option>Vegetarian</option><option>Vegan</option>
+            <option>Gluten-Free</option><option>Halal</option><option>Kosher</option>
+          </select>
+        </div>
+      </div>
+      <div class="tk-btns">
+        <button class="tk-gen" onclick="updateTicket()">↻ Update Ticket</button>
+        <button class="tk-print" onclick="window.print()">🖨 Print / Save PDF</button>
+        <button class="tk-close2" onclick="closeTk()">✕ Close</button>
+      </div>
+    </div>
+    <div id="bp-output"></div>
   </div>
 </div>
 
@@ -601,6 +715,7 @@ function card(f){
     <a class="dp-a" href="https://www.google.com/flights?q=flights+from+${f.from}+to+${f.to}" target="_blank">Google Flights</a>
     <a class="dp-a" href="https://www.flightradar24.com/airport/${f.from.toLowerCase()}" target="_blank">FlightRadar24</a>
     <button class="dp-a" onclick="copyF('${f.fl}','${f.from}','${f.to}','${f.ds}','${f.dep}')">Copy Details</button>
+    <button class="dp-a ticket" onclick="openTicket(${JSON.stringify(f).replace(/"/g,'&quot;')})">🎫 Generate Ticket</button>
   </div>
 </div>`;
   el.addEventListener('click',e=>{if(e.target.closest('a')||e.target.closest('button')&&e.target!==el)return; tog(f.id);});
@@ -667,6 +782,105 @@ window.addEventListener('load',()=>{
   const ag=document.getElementById('algrid');
   AL.forEach(a=>{ const el=document.createElement('button'); el.className='al-chip'; el.textContent=a.n; el.onclick=()=>toast(`${a.n} — enter a route above`); ag.appendChild(el); });
 });
+
+// ════════════════════════════════════════
+// BOARDING PASS GENERATOR
+// ════════════════════════════════════════
+let tkFlight=null;
+
+function openTicket(f){
+  tkFlight=f;
+  document.getElementById('tkbg').classList.add('open');
+  const sm={economy:'28C',business:'6A',first:'2A'};
+  if(!document.getElementById('tk-seat').value) document.getElementById('tk-seat').value=sm[cls]||'28C';
+  if(!document.getElementById('tk-pnr').value){
+    const ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    document.getElementById('tk-pnr').value=Array.from({length:6},()=>ch[Math.floor(Math.random()*ch.length)]).join('');
+  }
+  updateTicket();
+}
+
+function closeTk(){ document.getElementById('tkbg').classList.remove('open'); }
+
+function updateTicket(){
+  if(!tkFlight) return;
+  const f=tkFlight;
+  const name=document.getElementById('tk-name').value.trim().toUpperCase()||'PASSENGER NAME';
+  const seat=document.getElementById('tk-seat').value.trim()||'—';
+  const pnr=document.getElementById('tk-pnr').value.trim().toUpperCase()||'XXXXXX';
+  const grp=document.getElementById('tk-group').value;
+  const meal=document.getElementById('tk-meal').value;
+  const fa=ap(f.from),ta=ap(f.to);
+  const clsLabel=cls.charAt(0).toUpperCase()+cls.slice(1);
+  const clsCss=cls==='economy'?'cec':cls==='business'?'cbc':'cfc';
+
+  // Barcode bars
+  const seed=pnr.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+  const bars=Array.from({length:44},(_,i)=>{
+    const w=((seed*(i+1)*7)%3===0)?3:((seed*(i+1)*3)%5===0)?2:1;
+    const h=16+((seed*(i+1))%22);
+    return `<span style="width:${w}px;height:${h}px;background:#1a1a2e;border-radius:1px;display:inline-block"></span>`;
+  }).join('');
+
+  document.getElementById('bp-output').innerHTML=`
+<div class="bp">
+  <div class="bp-strip"></div>
+  <div class="bp-main">
+    <div class="bp-left">
+      <div class="bp-airline-row">
+        <div class="bp-airline">${f.al}</div>
+        <span class="bp-cbadge ${clsCss}">${clsLabel}</span>
+      </div>
+      <div class="bp-pax">
+        <div class="bp-pax-lbl">Passenger Name</div>
+        <div class="bp-pax-name">${name}</div>
+      </div>
+      <div class="bp-route">
+        <div class="bp-ap">
+          <div class="bp-iata">${f.from}</div>
+          <div class="bp-city">${fa.c}, ${fa.s}</div>
+          <div class="bp-time">${f.dep}</div>
+        </div>
+        <div class="bp-mid">
+          <div class="bp-midline"></div>
+          <div class="bp-middur">${f.dur}</div>
+        </div>
+        <div class="bp-ap" style="text-align:right">
+          <div class="bp-iata">${f.to}</div>
+          <div class="bp-city">${ta.c}, ${ta.s}</div>
+          <div class="bp-time">${f.arr}</div>
+        </div>
+      </div>
+      <div class="bp-details">
+        <div class="bp-di"><div class="bp-di-lbl">Flight</div><div class="bp-di-val">${f.fl}</div></div>
+        <div class="bp-di"><div class="bp-di-lbl">Date</div><div class="bp-di-val">${f.ds}</div></div>
+        <div class="bp-di"><div class="bp-di-lbl">Gate</div><div class="bp-di-val">${f.gate}</div></div>
+        <div class="bp-di"><div class="bp-di-lbl">Terminal</div><div class="bp-di-val">${f.term}</div></div>
+        <div class="bp-di"><div class="bp-di-lbl">Seat</div><div class="bp-di-val" style="color:#c9a84c;font-weight:700">${seat}</div></div>
+        <div class="bp-di"><div class="bp-di-lbl">Board Group</div><div class="bp-di-val">${grp}</div></div>
+        <div class="bp-di"><div class="bp-di-lbl">Meal</div><div class="bp-di-val">${meal}</div></div>
+        <div class="bp-di"><div class="bp-di-lbl">Aircraft</div><div class="bp-di-val">${f.ac}</div></div>
+      </div>
+    </div>
+    <div class="bp-right">
+      <div><div class="bp-stub-lbl">Passenger</div><div class="bp-stub-val" style="font-weight:700;color:#1a1a2e;font-size:.8rem;text-transform:uppercase">${name.split(' ')[0]||'PAX'}</div></div>
+      <div><div class="bp-stub-lbl">Flight</div><div class="bp-stub-val">${f.fl}</div></div>
+      <div><div class="bp-stub-lbl">From</div><div class="bp-stub-val" style="font-size:1.3rem;font-weight:800;color:#1a1a2e;line-height:1">${f.from}</div></div>
+      <div><div class="bp-stub-lbl">To</div><div class="bp-stub-val" style="font-size:1.3rem;font-weight:800;color:#1a1a2e;line-height:1">${f.to}</div></div>
+      <div><div class="bp-stub-lbl">Seat</div><div class="bp-stub-val" style="font-size:1.2rem;font-weight:800;color:#c9a84c">${seat}</div></div>
+      <div><div class="bp-stub-lbl">Booking Ref</div><div class="bp-stub-val" style="font-weight:700;letter-spacing:.1em;color:#1a1a2e">${pnr}</div></div>
+      <div class="bp-barcode"><div class="bp-stub-lbl">Scan at Gate</div><div style="display:flex;gap:2px;align-items:flex-end;height:40px;margin-top:.3rem">${bars}</div></div>
+    </div>
+  </div>
+  <div class="bp-bottom">
+    <div class="bp-bot-flight">${f.fl} · ${f.ds} · Departs ${f.dep}</div>
+    <div class="bp-bot-logo">Velocity<span>Air</span></div>
+    <div class="bp-bot-url">velocityfreightlogistics.help</div>
+  </div>
+</div>`;
+}
+
+document.getElementById('tkbg').addEventListener('click',e=>{if(e.target===document.getElementById('tkbg'))closeTk();});
 </script>
 </body>
 </html>
