@@ -199,9 +199,9 @@ nav{position:sticky;top:0;z-index:100;background:rgba(12,12,14,.92);backdrop-fil
 .bp-body{display:flex;background:#fff}
 .bp-main-col{flex:1;padding:1.4rem 1.8rem 1.2rem;position:relative}
 .bp-divider{width:1px;position:relative;background:repeating-linear-gradient(to bottom,#ddd 0,#ddd 8px,transparent 8px,transparent 14px)}
-.bp-divider::before,.bp-divider::after{content:'';position:absolute;left:-14px;width:28px;height:28px;background:var(--bg);border-radius:50%;z-index:2}
-.bp-divider::before{top:-14px}
-.bp-divider::after{bottom:-14px}
+.bp-divider::before,.bp-divider::after{content:'';position:absolute;left:-10px;width:20px;height:20px;background:var(--bg);border-radius:50%;z-index:2}
+.bp-divider::before{top:-10px}
+.bp-divider::after{bottom:-10px}
 .bp-stub-col{width:162px;padding:1.4rem 1.2rem 1.2rem;background:#fafaf8}
 
 /* Passenger */
@@ -890,7 +890,7 @@ function updateTicket(){
     const h=24+((bseed*(i+1)*13)%30);
     return `<span style="width:${w}px;height:${h}px;background:#1a1a1a;border-radius:1px;flex-shrink:0;display:inline-block"></span>`;
   }).join('');
-  const bnum=`${pnr}  ${f.from}${f.to}  ${f.fl.replace(' ','')}  ${seat}`.toUpperCase();
+  const bnum=`${pnr}   ${f.from} ${f.to}   ${f.fl.replace(' ','')}   SEAT ${seat}   ${f.ds}`;
   const micro='VALID FOR TRAVEL ONLY · THIS IS AN OFFICIAL BOARDING DOCUMENT · NOT TRANSFERABLE · '.repeat(5);
   const chk=((bseed*31+name.length*17)%9000+1000);
   const secCode=`${f.from}${f.to}${pnr.slice(0,3)}-${chk}`;
@@ -943,7 +943,7 @@ function updateTicket(){
     </div>
     <div class="bp-divider"></div>
     <div class="bp-stub-col">
-      <div class="bp-stub-field"><div class="bp-stub-lbl">Passenger</div><div class="bp-stub-val" style="font-size:.7rem;font-weight:800;text-transform:uppercase;color:#1a1a1a;line-height:1.35">${name}</div></div>
+      <div class="bp-stub-field"><div class="bp-stub-lbl">Passenger</div><div class="bp-stub-val" style="font-size:.7rem;font-weight:800;text-transform:uppercase;color:#1a1a1a;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${name}</div></div>
       <div class="bp-stub-field"><div class="bp-stub-lbl">From</div><div class="bp-stub-iata" style="color:${brand.accent}">${f.from}</div></div>
       <div class="bp-stub-field"><div class="bp-stub-lbl">To</div><div class="bp-stub-iata" style="color:${brand.accent}">${f.to}</div></div>
       <div class="bp-stub-field"><div class="bp-stub-lbl">Seat</div><div class="bp-stub-seat" style="color:${brand.accent}">${seat}</div></div>
