@@ -181,53 +181,88 @@ nav{position:sticky;top:0;z-index:100;background:rgba(12,12,14,.92);backdrop-fil
 .tk-print:hover{border-color:var(--gold-dim);color:var(--gold)}
 .tk-close2{background:none;border:1px solid var(--border);color:var(--muted);padding:.65rem 1.2rem;border-radius:7px;font-size:.78rem;cursor:pointer;font-family:var(--sans)}
 
-/* BOARDING PASS */
-.bp{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6);font-family:'Jost',sans-serif}
-.bp-strip{height:8px;background:linear-gradient(90deg,#1a1a2e,#c9a84c,#1a1a2e)}
-.bp-main{display:flex;min-height:200px}
-.bp-left{flex:1;padding:1.8rem 2rem;background:#fff;position:relative}
-.bp-right{width:155px;background:#f9f7f2;border-left:2px dashed #e0dbd0;padding:1.4rem 1.1rem;display:flex;flex-direction:column;gap:.65rem;position:relative}
-.bp-right::before,.bp-right::after{content:'';position:absolute;left:-13px;width:26px;height:26px;background:var(--bg);border-radius:50%;z-index:1}
-.bp-right::before{top:-13px}
-.bp-right::after{bottom:-13px}
-.bp-airline-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
-.bp-airline{font-size:1rem;font-weight:700;color:#1a1a2e;letter-spacing:.02em}
-.bp-cbadge{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .65rem;border-radius:20px}
-.cec{background:#e8f5ff;color:#1a6fa8}
-.cbc{background:#fffbe6;color:#b8860b}
-.cfc{background:#fdf2ff;color:#7b2fbe}
-.bp-route{display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem}
-.bp-ap{display:flex;flex-direction:column}
-.bp-iata{font-size:2.6rem;font-weight:800;color:#1a1a2e;line-height:1;letter-spacing:-.02em}
-.bp-city{font-size:.6rem;color:#999;margin-top:.15rem}
-.bp-time{font-size:.95rem;font-weight:600;color:#333;margin-top:.25rem}
-.bp-mid{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem}
-.bp-midline{width:100%;height:1px;background:linear-gradient(90deg,transparent,#ccc,transparent);position:relative}
-.bp-midline::after{content:'✈';position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-size:.85rem;color:#c9a84c;background:#fff;padding:0 .25rem}
-.bp-middur{font-size:.58rem;color:#bbb;letter-spacing:.08em;margin-top:.2rem}
-.bp-pax{margin-bottom:.9rem}
-.bp-pax-lbl{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:#bbb;margin-bottom:.2rem}
-.bp-pax-name{font-size:1.05rem;font-weight:700;color:#1a1a2e;letter-spacing:.05em;text-transform:uppercase}
-.bp-details{display:flex;gap:1.2rem;flex-wrap:wrap}
-.bp-di{display:flex;flex-direction:column;gap:.15rem}
-.bp-di-lbl{font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:#bbb}
-.bp-di-val{font-size:.8rem;font-weight:600;color:#333}
-.bp-stub-lbl{font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:#bbb;margin-bottom:.2rem}
-.bp-stub-val{font-size:.76rem;font-weight:600;color:#555}
-.bp-barcode{margin-top:auto;padding-top:.8rem}
-.bp-bars{display:flex;gap:2px;align-items:flex-end;height:38px}
-.bp-bars span{background:#1a1a2e;border-radius:1px;display:inline-block}
-.bp-bottom{background:#1a1a2e;padding:.7rem 2rem;display:flex;align-items:center;justify-content:space-between}
-.bp-bot-flight{font-size:.7rem;color:rgba(255,255,255,.45);letter-spacing:.1em}
-.bp-bot-logo{font-family:'Cormorant Garamond',Georgia,serif;font-size:1rem;color:#c9a84c;font-weight:600}
-.bp-bot-logo span{color:rgba(255,255,255,.5);font-weight:300}
-.bp-bot-url{font-size:.58rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
+/* BOARDING PASS — PROFESSIONAL */
+.bp-wrap{position:relative;filter:drop-shadow(0 24px 48px rgba(0,0,0,.7))}
+.bp{background:#fff;border-radius:18px;overflow:hidden;font-family:'Jost',sans-serif;position:relative;width:100%}
+
+/* Airline header band */
+.bp-header{padding:1.2rem 1.8rem 1rem;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
+.bp-header::after{content:'';position:absolute;inset:0;opacity:.08;background-image:repeating-linear-gradient(45deg,currentColor 0,currentColor 1px,transparent 0,transparent 50%);background-size:8px 8px}
+.bp-logo-area{display:flex;flex-direction:column;gap:.15rem;z-index:1}
+.bp-logo-text{font-size:1.4rem;font-weight:900;letter-spacing:.02em;line-height:1}
+.bp-logo-sub{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;opacity:.7}
+.bp-header-right{display:flex;flex-direction:column;align-items:flex-end;gap:.3rem;z-index:1}
+.bp-cbadge{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:.28rem .8rem;border-radius:20px;border:2px solid currentColor}
+.bp-flight-no{font-size:.8rem;font-weight:700;letter-spacing:.12em;opacity:.8}
+
+/* Body */
+.bp-body{display:flex;background:#fff}
+.bp-main-col{flex:1;padding:1.4rem 1.8rem 1.2rem;position:relative}
+.bp-divider{width:1px;position:relative;background:repeating-linear-gradient(to bottom,#ddd 0,#ddd 8px,transparent 8px,transparent 14px)}
+.bp-divider::before,.bp-divider::after{content:'';position:absolute;left:-14px;width:28px;height:28px;background:var(--bg);border-radius:50%;z-index:2}
+.bp-divider::before{top:-14px}
+.bp-divider::after{bottom:-14px}
+.bp-stub-col{width:162px;padding:1.4rem 1.2rem 1.2rem;background:#fafaf8}
+
+/* Passenger */
+.bp-pax-section{margin-bottom:1.1rem;padding-bottom:1rem;border-bottom:1px solid #f0ede8}
+.bp-field-lbl{font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:#b0a898;margin-bottom:.2rem}
+.bp-pax-name{font-size:1.15rem;font-weight:800;color:#1a1a1a;letter-spacing:.06em;text-transform:uppercase}
+
+/* Route */
+.bp-route-row{display:flex;align-items:center;gap:.6rem;margin-bottom:1.1rem}
+.bp-ap-block{display:flex;flex-direction:column}
+.bp-iata{font-size:3rem;font-weight:900;line-height:1;letter-spacing:-.03em;color:#1a1a1a}
+.bp-ap-name{font-size:.58rem;color:#aaa;margin-top:.12rem;letter-spacing:.04em;max-width:120px;line-height:1.3}
+.bp-dep-time{font-size:1.05rem;font-weight:700;color:#222;margin-top:.3rem}
+.bp-flight-path{flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:0 .5rem}
+.bp-path-line{width:100%;height:1px;background:linear-gradient(90deg,#e8e4de 20%,#c9a84c 50%,#e8e4de 80%);position:relative}
+.bp-path-plane{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:.9rem;background:#fff;padding:0 .3rem;line-height:1}
+.bp-path-dur{font-size:.58rem;color:#bbb;letter-spacing:.1em;text-transform:uppercase}
+.bp-path-stops{font-size:.55rem;color:#bbb}
+
+/* Flight info grid */
+.bp-info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}
+.bp-info-cell{display:flex;flex-direction:column;gap:.18rem}
+.bp-info-val{font-size:.85rem;font-weight:700;color:#1a1a1a}
+
+/* Stub column */
+.bp-stub-field{margin-bottom:.75rem}
+.bp-stub-lbl{font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:#c0b8ad;margin-bottom:.18rem}
+.bp-stub-val{font-size:.82rem;font-weight:700;color:#333}
+.bp-stub-iata{font-size:1.6rem;font-weight:900;color:#1a1a1a;line-height:1;letter-spacing:-.02em}
+.bp-stub-seat{font-size:1.8rem;font-weight:900;line-height:1;letter-spacing:-.02em}
+
+/* Watermark */
+.bp-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-35deg);font-size:4.5rem;font-weight:900;letter-spacing:.3em;text-transform:uppercase;opacity:.03;color:#1a1a1a;pointer-events:none;white-space:nowrap;user-select:none;z-index:0}
+
+/* Security strip */
+.bp-security{background:linear-gradient(90deg,#f5f3ee,#ede9e0,#f5f3ee);padding:.5rem 1.8rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #ece8e0}
+.bp-security-text{font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;color:#c0b8ad}
+.bp-verified{display:flex;align-items:center;gap:.35rem;font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.bp-verified-icon{width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.45rem;color:#fff;font-weight:900}
+
+/* Barcode section */
+.bp-barcode-section{padding:.9rem 1.8rem 1rem;background:#fff;border-top:1px solid #f0ede8;display:flex;gap:1.5rem;align-items:center}
+.bp-barcode-bars{display:flex;gap:1.5px;align-items:flex-end;height:52px}
+.bp-barcode-num{font-size:.52rem;letter-spacing:.2em;color:#bbb;margin-top:.35rem;font-family:monospace}
+.bp-qr-block{display:flex;flex-direction:column;align-items:center;gap:.3rem}
+.bp-qr-canvas{border-radius:4px;overflow:hidden}
+.bp-qr-lbl{font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:#bbb}
+
+/* Footer */
+.bp-footer{background:#1c1c2e;padding:.75rem 1.8rem;display:flex;align-items:center;justify-content:space-between;border-radius:0 0 18px 18px}
+.bp-footer-airline{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.bp-footer-center{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.05rem;color:#c9a84c;font-weight:600;letter-spacing:.04em}
+.bp-footer-center span{color:rgba(255,255,255,.4);font-weight:300}
+.bp-footer-ref{font-size:.55rem;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase}
 
 @media print{
   body>*:not(.tk-bg){display:none!important}
-  .tk-bg{background:#fff!important;padding:0!important;position:static!important;display:block!important}
+  .tk-bg{background:#fff!important;padding:0!important;position:static!important;display:block!important;overflow:visible!important}
   .tk-editor,.tk-btns{display:none!important}
-  .bp{box-shadow:none}
+  .bp-wrap{filter:none}
+  .bp{border-radius:8px;border:1px solid #ddd}
 }
 
 /* NO RESULTS */
@@ -784,9 +819,25 @@ window.addEventListener('load',()=>{
 });
 
 // ════════════════════════════════════════
-// BOARDING PASS GENERATOR
+// BOARDING PASS GENERATOR — PROFESSIONAL
 // ════════════════════════════════════════
 let tkFlight=null;
+
+const BRANDS={
+  'AA':{bg:'linear-gradient(135deg,#003580 0%,#0050a0 100%)',color:'#fff',accent:'#c8102e',name:'AMERICAN AIRLINES'},
+  'UA':{bg:'linear-gradient(135deg,#002244 0%,#0033a0 100%)',color:'#fff',accent:'#4db8e8',name:'UNITED AIRLINES'},
+  'DL':{bg:'linear-gradient(135deg,#003366 0%,#aa0000 100%)',color:'#fff',accent:'#cc0000',name:'DELTA AIR LINES'},
+  'WN':{bg:'linear-gradient(135deg,#304cb2 0%,#f9a825 100%)',color:'#fff',accent:'#f9a825',name:'SOUTHWEST AIRLINES'},
+  'B6':{bg:'linear-gradient(135deg,#003876 0%,#0068b0 100%)',color:'#fff',accent:'#00aacc',name:'JETBLUE AIRWAYS'},
+  'AS':{bg:'linear-gradient(135deg,#01426a 0%,#00a0d2 100%)',color:'#fff',accent:'#8dc8e8',name:'ALASKA AIRLINES'},
+  'NK':{bg:'linear-gradient(135deg,#d4a900 0%,#ffc200 100%)',color:'#1a1a1a',accent:'#1a1a1a',name:'SPIRIT AIRLINES'},
+  'F9':{bg:'linear-gradient(135deg,#004d2c 0%,#00843d 100%)',color:'#fff',accent:'#7dc242',name:'FRONTIER AIRLINES'},
+  'HA':{bg:'linear-gradient(135deg,#4b0082 0%,#7b2d8b 100%)',color:'#fff',accent:'#e91e8c',name:'HAWAIIAN AIRLINES'},
+  'G4':{bg:'linear-gradient(135deg,#003087 0%,#0050a0 100%)',color:'#fff',accent:'#ff6b00',name:'ALLEGIANT AIR'},
+  'SY':{bg:'linear-gradient(135deg,#1d3461 0%,#1a5fb4 100%)',color:'#fff',accent:'#ffd700',name:'SUN COUNTRY AIRLINES'},
+  'MX':{bg:'linear-gradient(135deg,#00b4d8 0%,#0077b6 100%)',color:'#fff',accent:'#90e0ef',name:'BREEZE AIRWAYS'},
+};
+const DBRAND={bg:'linear-gradient(135deg,#1a1a2e 0%,#2d2d4e 100%)',color:'#fff',accent:'#c9a84c',name:'VELOCITYAIR'};
 
 function openTicket(f){
   tkFlight=f;
@@ -802,82 +853,130 @@ function openTicket(f){
 
 function closeTk(){ document.getElementById('tkbg').classList.remove('open'); }
 
+function makeQR(text,sz){
+  const cv=document.createElement('canvas'); cv.width=sz; cv.height=sz;
+  const ctx=cv.getContext('2d');
+  ctx.fillStyle='#fff'; ctx.fillRect(0,0,sz,sz);
+  const m=21, c=Math.floor(sz/m);
+  const seed=text.split('').reduce((a,b)=>a+b.charCodeAt(0),0);
+  // Finder patterns
+  [[0,0],[0,14],[14,0]].forEach(([r,cc])=>{
+    ctx.fillStyle='#1a1a1a'; ctx.fillRect(cc*c,r*c,7*c,7*c);
+    ctx.fillStyle='#fff';    ctx.fillRect((cc+1)*c,(r+1)*c,5*c,5*c);
+    ctx.fillStyle='#1a1a1a'; ctx.fillRect((cc+2)*c,(r+2)*c,3*c,3*c);
+  });
+  for(let r=0;r<m;r++) for(let q=0;q<m;q++){
+    const finder=(r<8&&q<8)||(r<8&&q>12)||(r>12&&q<8);
+    if(!finder&&((seed*(r*m+q+1)*7)%11)>4){ctx.fillStyle='#1a1a1a';ctx.fillRect(q*c,r*c,c,c);}
+  }
+  return cv;
+}
+
 function updateTicket(){
   if(!tkFlight) return;
   const f=tkFlight;
   const name=document.getElementById('tk-name').value.trim().toUpperCase()||'PASSENGER NAME';
-  const seat=document.getElementById('tk-seat').value.trim()||'—';
+  const seat=document.getElementById('tk-seat').value.trim().toUpperCase()||'—';
   const pnr=document.getElementById('tk-pnr').value.trim().toUpperCase()||'XXXXXX';
   const grp=document.getElementById('tk-group').value;
   const meal=document.getElementById('tk-meal').value;
-  const fa=ap(f.from),ta=ap(f.to);
+  const fa=ap(f.from), ta=ap(f.to);
+  const brand=BRANDS[f.alc]||DBRAND;
   const clsLabel=cls.charAt(0).toUpperCase()+cls.slice(1);
-  const clsCss=cls==='economy'?'cec':cls==='business'?'cbc':'cfc';
-
-  // Barcode bars
-  const seed=pnr.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
-  const bars=Array.from({length:44},(_,i)=>{
-    const w=((seed*(i+1)*7)%3===0)?3:((seed*(i+1)*3)%5===0)?2:1;
-    const h=16+((seed*(i+1))%22);
-    return `<span style="width:${w}px;height:${h}px;background:#1a1a2e;border-radius:1px;display:inline-block"></span>`;
+  const clsBadge=cls==='economy'?'color:#fff;border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.12)':cls==='business'?'color:#ffd700;border-color:#ffd700;background:rgba(255,215,0,.15)':'color:#f0c0ff;border-color:#f0c0ff;background:rgba(240,192,255,.15)';
+  const bseed=pnr.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+  const bars=Array.from({length:90},(_,i)=>{
+    const w=((bseed*(i+1)*7)%3===0)?3:((bseed*(i+1)*3)%5===0)?2:1;
+    const h=24+((bseed*(i+1)*13)%30);
+    return `<span style="width:${w}px;height:${h}px;background:#1a1a1a;border-radius:1px;flex-shrink:0;display:inline-block"></span>`;
   }).join('');
+  const bnum=`${pnr}  ${f.from}${f.to}  ${f.fl.replace(' ','')}  ${seat}`.toUpperCase();
+  const micro='VALID FOR TRAVEL ONLY · THIS IS AN OFFICIAL BOARDING DOCUMENT · NOT TRANSFERABLE · '.repeat(5);
+  const chk=((bseed*31+name.length*17)%9000+1000);
+  const secCode=`${f.from}${f.to}${pnr.slice(0,3)}-${chk}`;
 
   document.getElementById('bp-output').innerHTML=`
-<div class="bp">
-  <div class="bp-strip"></div>
-  <div class="bp-main">
-    <div class="bp-left">
-      <div class="bp-airline-row">
-        <div class="bp-airline">${f.al}</div>
-        <span class="bp-cbadge ${clsCss}">${clsLabel}</span>
-      </div>
-      <div class="bp-pax">
-        <div class="bp-pax-lbl">Passenger Name</div>
+<div class="bp-wrap"><div class="bp">
+  <div class="bp-header" style="background:${brand.bg};color:${brand.color}">
+    <div class="bp-logo-area">
+      <div class="bp-logo-text">${brand.name}</div>
+      <div class="bp-logo-sub">BOARDING PASS</div>
+    </div>
+    <div class="bp-header-right">
+      <span class="bp-cbadge" style="${clsBadge}">${clsLabel} Class</span>
+      <div class="bp-flight-no">${f.fl}</div>
+    </div>
+  </div>
+  <div class="bp-body">
+    <div class="bp-main-col">
+      <div class="bp-watermark">${(brand.name.split(' ')[0])}</div>
+      <div class="bp-pax-section">
+        <div class="bp-field-lbl">Passenger Name</div>
         <div class="bp-pax-name">${name}</div>
       </div>
-      <div class="bp-route">
-        <div class="bp-ap">
-          <div class="bp-iata">${f.from}</div>
-          <div class="bp-city">${fa.c}, ${fa.s}</div>
-          <div class="bp-time">${f.dep}</div>
+      <div class="bp-route-row">
+        <div class="bp-ap-block">
+          <div class="bp-iata" style="color:${brand.accent}">${f.from}</div>
+          <div class="bp-ap-name">${fa.n}</div>
+          <div class="bp-dep-time">${f.dep}</div>
         </div>
-        <div class="bp-mid">
-          <div class="bp-midline"></div>
-          <div class="bp-middur">${f.dur}</div>
+        <div class="bp-flight-path">
+          <div class="bp-path-line"><span class="bp-path-plane">✈</span></div>
+          <div class="bp-path-dur">${f.dur}</div>
+          <div class="bp-path-stops">Non-Stop</div>
         </div>
-        <div class="bp-ap" style="text-align:right">
-          <div class="bp-iata">${f.to}</div>
-          <div class="bp-city">${ta.c}, ${ta.s}</div>
-          <div class="bp-time">${f.arr}</div>
+        <div class="bp-ap-block" style="text-align:right">
+          <div class="bp-iata" style="color:${brand.accent}">${f.to}</div>
+          <div class="bp-ap-name" style="text-align:right">${ta.n}</div>
+          <div class="bp-dep-time">${f.arr}</div>
         </div>
       </div>
-      <div class="bp-details">
-        <div class="bp-di"><div class="bp-di-lbl">Flight</div><div class="bp-di-val">${f.fl}</div></div>
-        <div class="bp-di"><div class="bp-di-lbl">Date</div><div class="bp-di-val">${f.ds}</div></div>
-        <div class="bp-di"><div class="bp-di-lbl">Gate</div><div class="bp-di-val">${f.gate}</div></div>
-        <div class="bp-di"><div class="bp-di-lbl">Terminal</div><div class="bp-di-val">${f.term}</div></div>
-        <div class="bp-di"><div class="bp-di-lbl">Seat</div><div class="bp-di-val" style="color:#c9a84c;font-weight:700">${seat}</div></div>
-        <div class="bp-di"><div class="bp-di-lbl">Board Group</div><div class="bp-di-val">${grp}</div></div>
-        <div class="bp-di"><div class="bp-di-lbl">Meal</div><div class="bp-di-val">${meal}</div></div>
-        <div class="bp-di"><div class="bp-di-lbl">Aircraft</div><div class="bp-di-val">${f.ac}</div></div>
+      <div class="bp-info-grid">
+        <div class="bp-info-cell"><div class="bp-field-lbl">Date</div><div class="bp-info-val">${f.ds}</div></div>
+        <div class="bp-info-cell"><div class="bp-field-lbl">Gate</div><div class="bp-info-val" style="color:${brand.accent};font-size:1rem">${f.gate}</div></div>
+        <div class="bp-info-cell"><div class="bp-field-lbl">Terminal</div><div class="bp-info-val">${f.term}</div></div>
+        <div class="bp-info-cell"><div class="bp-field-lbl">Aircraft</div><div class="bp-info-val" style="font-size:.7rem">${f.ac}</div></div>
+        <div class="bp-info-cell"><div class="bp-field-lbl">Boarding</div><div class="bp-info-val">${grp}</div></div>
+        <div class="bp-info-cell"><div class="bp-field-lbl">Meal</div><div class="bp-info-val" style="font-size:.72rem">${meal}</div></div>
+        <div class="bp-info-cell" style="grid-column:span 2"><div class="bp-field-lbl">Booking Reference</div><div class="bp-info-val" style="font-size:1.1rem;letter-spacing:.14em">${pnr}</div></div>
       </div>
     </div>
-    <div class="bp-right">
-      <div><div class="bp-stub-lbl">Passenger</div><div class="bp-stub-val" style="font-weight:700;color:#1a1a2e;font-size:.8rem;text-transform:uppercase">${name.split(' ')[0]||'PAX'}</div></div>
-      <div><div class="bp-stub-lbl">Flight</div><div class="bp-stub-val">${f.fl}</div></div>
-      <div><div class="bp-stub-lbl">From</div><div class="bp-stub-val" style="font-size:1.3rem;font-weight:800;color:#1a1a2e;line-height:1">${f.from}</div></div>
-      <div><div class="bp-stub-lbl">To</div><div class="bp-stub-val" style="font-size:1.3rem;font-weight:800;color:#1a1a2e;line-height:1">${f.to}</div></div>
-      <div><div class="bp-stub-lbl">Seat</div><div class="bp-stub-val" style="font-size:1.2rem;font-weight:800;color:#c9a84c">${seat}</div></div>
-      <div><div class="bp-stub-lbl">Booking Ref</div><div class="bp-stub-val" style="font-weight:700;letter-spacing:.1em;color:#1a1a2e">${pnr}</div></div>
-      <div class="bp-barcode"><div class="bp-stub-lbl">Scan at Gate</div><div style="display:flex;gap:2px;align-items:flex-end;height:40px;margin-top:.3rem">${bars}</div></div>
+    <div class="bp-divider"></div>
+    <div class="bp-stub-col">
+      <div class="bp-stub-field"><div class="bp-stub-lbl">Passenger</div><div class="bp-stub-val" style="font-size:.7rem;font-weight:800;text-transform:uppercase;color:#1a1a1a;line-height:1.35">${name}</div></div>
+      <div class="bp-stub-field"><div class="bp-stub-lbl">From</div><div class="bp-stub-iata" style="color:${brand.accent}">${f.from}</div></div>
+      <div class="bp-stub-field"><div class="bp-stub-lbl">To</div><div class="bp-stub-iata" style="color:${brand.accent}">${f.to}</div></div>
+      <div class="bp-stub-field"><div class="bp-stub-lbl">Seat</div><div class="bp-stub-seat" style="color:${brand.accent}">${seat}</div></div>
+      <div class="bp-stub-field"><div class="bp-stub-lbl">Flight</div><div class="bp-stub-val" style="font-size:.88rem;font-weight:800;color:#1a1a1a;letter-spacing:.06em">${f.fl}</div></div>
+      <div class="bp-stub-field"><div class="bp-stub-lbl">Departs</div><div class="bp-stub-val" style="font-size:.95rem;font-weight:700;color:#1a1a1a">${f.dep}</div></div>
+      <div class="bp-stub-field"><div class="bp-stub-lbl">Ref</div><div class="bp-stub-val" style="letter-spacing:.1em;font-weight:800">${pnr}</div></div>
     </div>
   </div>
-  <div class="bp-bottom">
-    <div class="bp-bot-flight">${f.fl} · ${f.ds} · Departs ${f.dep}</div>
-    <div class="bp-bot-logo">Velocity<span>Air</span></div>
-    <div class="bp-bot-url">velocityfreightlogistics.help</div>
+  <div class="bp-security">
+    <div style="overflow:hidden;max-width:62%;opacity:.4"><div style="font-size:.37rem;letter-spacing:.1em;text-transform:uppercase;color:#888;white-space:nowrap">${micro}</div></div>
+    <div class="bp-verified" style="color:#2e7d32"><div class="bp-verified-icon" style="background:#2e7d32">✓</div>VERIFIED · ${secCode}</div>
   </div>
-</div>`;
+  <div class="bp-barcode-section">
+    <div style="flex:1">
+      <div style="display:flex;gap:1.5px;align-items:flex-end;height:54px;overflow:hidden">${bars}</div>
+      <div class="bp-barcode-num">${bnum}</div>
+    </div>
+    <div class="bp-qr-block">
+      <canvas id="qr-cv" class="bp-qr-canvas" width="68" height="68"></canvas>
+      <div class="bp-qr-lbl">Scan at Gate</div>
+    </div>
+  </div>
+  <div class="bp-footer">
+    <div class="bp-footer-airline" style="color:${brand.accent}">${f.alc} · ${f.fl}</div>
+    <div class="bp-footer-center">Velocity<span>Air</span></div>
+    <div class="bp-footer-ref">velocityfreightlogistics.help</div>
+  </div>
+</div></div>`;
+
+  requestAnimationFrame(()=>{
+    const cv=document.getElementById('qr-cv');
+    if(cv){ const q=makeQR(`${pnr}${f.from}${f.to}${name}`,68); cv.getContext('2d').drawImage(q,0,0); }
+  });
 }
 
 document.getElementById('tkbg').addEventListener('click',e=>{if(e.target===document.getElementById('tkbg'))closeTk();});
