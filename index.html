@@ -904,7 +904,7 @@ function updateTicket(){
   const micro='VALID FOR TRAVEL ONLY · THIS IS AN OFFICIAL BOARDING DOCUMENT · NOT TRANSFERABLE · '.repeat(5);
   const chk=((bseed*31+name.length*17)%9000+1000);
   const secCode=`${f.from}${f.to}${pnr.slice(0,3)}-${chk}`;
-  const qrText=`${pnr}|${f.from}|${f.to}|${f.fl}|${seat}|${f.ds}|${name}`;
+  const qrText=`https://flightaware.com/live/findflight/?origin=${f.from}&destination=${f.to}`;
 
   document.getElementById('bp-output').innerHTML=`
 <div class="bp-wrap"><div class="bp">
