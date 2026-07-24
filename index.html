@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VelocityAir — Scheduled Flight Finder</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0c0c0e;--surface:#111115;--card:#16161c;--border:#2a2a35;--border-light:#3a3a48;--gold:#c9a84c;--gold-light:#e2c47a;--gold-dim:#6b5520;--gold-bg:rgba(201,168,76,0.07);--silver:#a8afc0;--white:#f0eeea;--muted:#5c5c70;--green:#2ecc71;--amber:#f0a500;--red:#e74c3c;--blue:#4a9eff;--purple:#9b59b6;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif;--radius:12px}
@@ -180,6 +181,8 @@ nav{position:sticky;top:0;z-index:100;background:rgba(12,12,14,.92);backdrop-fil
 .tk-gen:hover{background:var(--gold-light)}
 .tk-print{background:none;border:1px solid var(--border);color:var(--silver);padding:.65rem 1.2rem;border-radius:7px;font-size:.78rem;cursor:pointer;font-family:var(--sans)}
 .tk-print:hover{border-color:var(--gold-dim);color:var(--gold)}
+.tk-dl{background:none;border:1px solid rgba(46,204,113,.4);color:#2ecc71;padding:.65rem 1rem;border-radius:7px;font-size:.72rem;cursor:pointer;font-family:var(--sans);transition:all .2s}
+.tk-dl:hover{background:rgba(46,204,113,.1);border-color:#2ecc71}
 .tk-close2{background:none;border:1px solid var(--border);color:var(--muted);padding:.65rem 1.2rem;border-radius:7px;font-size:.78rem;cursor:pointer;font-family:var(--sans)}
 
 /* BOARDING PASS — PROFESSIONAL */
@@ -382,8 +385,11 @@ nav{position:sticky;top:0;z-index:100;background:rgba(12,12,14,.92);backdrop-fil
         </div>
       </div>
       <div class="tk-btns">
-        <button class="tk-gen" onclick="updateTicket()">↻ Update Ticket</button>
-        <button class="tk-print" onclick="window.print()">🖨 Print / Save PDF</button>
+        <button class="tk-gen" onclick="updateTicket()">↻ Update</button>
+        <button class="tk-print" onclick="window.print()">🖨 Print / PDF</button>
+        <button class="tk-dl" onclick="downloadTicket('phone')" title="Phone wallpaper size">📱 Phone</button>
+        <button class="tk-dl" onclick="downloadTicket('standard')" title="Standard boarding pass size">🎫 Standard</button>
+        <button class="tk-dl" onclick="downloadTicket('hd')" title="High resolution for print">🖼 HD Print</button>
         <button class="tk-close2" onclick="closeTk()">✕ Close</button>
       </div>
     </div>
@@ -1212,6 +1218,69 @@ function updateTicket(){
 }
 
 document.getElementById('tkbg').addEventListener('click',e=>{if(e.target===document.getElementById('tkbg'))closeTk();});
+
+// ════════════════════════════════════════
+// DOWNLOAD TICKET AS IMAGE
+// ════════════════════════════════════════
+async function downloadTicket(format){
+  const bp = document.querySelector('.bp-wrap');
+  if(!bp){ toast('Generate a ticket first'); return; }
+
+  toast('Preparing download…');
+
+  // Size configs
+  const sizes = {
+    phone:    {scale:3, label:'Phone'},       // ~1080px wide — perfect for phone wallpaper/share
+    standard: {scale:2, label:'Standard'},    // ~700px wide — standard boarding pass
+    hd:       {scale:4, label:'HD'},          // ~2800px wide — high res print
+  };
+  const cfg = sizes[format] || sizes.standard;
+
+  try {
+    const canvas = await html2canvas(bp, {
+      scale: cfg.scale,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#0c0c0e',
+      logging: false,
+    });
+
+    // For phone format — add portrait padding (make it phone wallpaper sized)
+    let finalCanvas = canvas;
+    if(format === 'phone'){
+      const ph = document.createElement('canvas');
+      const ratio = 9/16; // phone aspect ratio
+      const pw = canvas.width;
+      const targetH = Math.round(pw / ratio);
+      ph.width  = pw;
+      ph.height = Math.max(canvas.height + 120, targetH);
+      const ctx = ph.getContext('2d');
+      ctx.fillStyle = '#0c0c0e';
+      ctx.fillRect(0,0,ph.width,ph.height);
+      const yOffset = Math.round((ph.height - canvas.height) / 2);
+      ctx.drawImage(canvas, 0, yOffset);
+      finalCanvas = ph;
+    }
+
+    // Download
+    const f = tkFlight;
+    const name = (document.getElementById('tk-name').value.trim()||'boarding-pass').toUpperCase().replace(/\s+/g,'-');
+    const filename = `${f.from}-${f.to}-${f.fl.replace(' ','')}-${name}-${cfg.label}.png`;
+
+    finalCanvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      const a   = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+      toast(`✓ Downloaded as ${cfg.label} PNG`);
+    }, 'image/png');
+
+  } catch(e) {
+    toast('Download failed — try Print/PDF instead');
+  }
+}
 </script>
 </body>
 </html>
