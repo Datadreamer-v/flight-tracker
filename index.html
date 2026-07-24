@@ -287,9 +287,45 @@ nav{position:sticky;top:0;z-index:100;background:rgba(12,12,14,.92);backdrop-fil
   .fc-top{grid-template-columns:1fr auto}
   .fc-route{grid-column:1/-1;margin-top:.4rem}
 }
+/* ACCESS GATE */
+.gate{position:fixed;inset:0;background:#0c0c0e;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.gate.hidden{display:none}
+.gate-card{background:#16161c;border:1px solid #2a2a35;border-radius:16px;padding:2.5rem 2rem;max-width:400px;width:90%;text-align:center;position:relative;overflow:hidden}
+.gate-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#c9a84c,transparent)}
+.gate-logo{font-family:'Cormorant Garamond',Georgia,serif;font-size:2.2rem;font-weight:600;color:#c9a84c;margin-bottom:.2rem}
+.gate-logo span{color:rgba(255,255,255,.45);font-weight:300}
+.gate-sub{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#5c5c70;margin-bottom:2rem}
+.gate-lock{font-size:2.5rem;margin-bottom:1rem}
+.gate-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.4rem;color:#f0eeea;margin-bottom:.4rem}
+.gate-desc{font-size:.75rem;color:#5c5c70;margin-bottom:1.5rem;line-height:1.7}
+.gate-input{width:100%;background:#111115;border:1px solid #2a2a35;color:#f0eeea;padding:.9rem 1rem;border-radius:8px;font-family:'Jost',sans-serif;font-size:1.1rem;outline:none;text-align:center;letter-spacing:.3em;text-transform:uppercase;transition:border-color .2s;margin-bottom:.75rem}
+.gate-input:focus{border-color:#c9a84c}
+.gate-input::placeholder{color:#3a3a48;letter-spacing:.1em;font-size:.85rem;text-transform:none}
+.gate-btn{width:100%;background:#c9a84c;color:#0c0c0e;border:none;padding:.9rem;border-radius:8px;font-family:'Jost',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-bottom:.75rem}
+.gate-btn:hover{background:#e2c47a;transform:translateY(-1px)}
+.gate-error{font-size:.74rem;color:#e74c3c;background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.2);border-radius:6px;padding:.5rem .8rem;display:none;margin-bottom:.5rem}
+.gate-error.show{display:block}
+.gate-footer{font-size:.58rem;color:#2a2a35;margin-top:1.5rem;letter-spacing:.08em;text-transform:uppercase}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.gate-shake{animation:shake .4s ease}
 </style>
 </head>
 <body>
+
+<!-- ACCESS GATE -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-logo">Velocity<span>Air</span></div>
+    <div class="gate-sub">Private Access Portal</div>
+    <div class="gate-lock">🔐</div>
+    <div class="gate-title">Enter Access Code</div>
+    <div class="gate-desc">This platform is restricted to authorized users only. Please enter your access code to continue.</div>
+    <div class="gate-error" id="gate-error">Incorrect access code. Please try again.</div>
+    <input class="gate-input" id="gate-input" placeholder="Enter access code…" type="password" maxlength="20" onkeydown="if(event.key==='Enter')checkCode()">
+    <button class="gate-btn" onclick="checkCode()">UNLOCK ACCESS →</button>
+    <div class="gate-footer">dustandhonor.com · Authorized Personnel Only</div>
+  </div>
+</div>
 
 <div class="modal-bg" id="mbg">
   <div class="modal">
@@ -926,7 +962,30 @@ window.addEventListener('load',()=>{
 });
 
 // ════════════════════════════════════════
-// BOARDING PASS GENERATOR — PROFESSIONAL
+// ACCESS GATE
+// ════════════════════════════════════════
+const ACCESS_CODE = 'C1MX5QT8WPK3';
+function checkCode(){
+  const input = document.getElementById('gate-input').value.trim().toUpperCase();
+  const err   = document.getElementById('gate-error');
+  const card  = document.querySelector('.gate-card');
+  if(input === ACCESS_CODE){
+    try{ sessionStorage.setItem('va_access','1'); }catch(e){}
+    document.getElementById('gate').classList.add('hidden');
+  } else {
+    err.classList.add('show');
+    document.getElementById('gate-input').value='';
+    card.classList.remove('gate-shake');
+    void card.offsetWidth;
+    card.classList.add('gate-shake');
+  }
+}
+// Check session on load
+(function(){
+  try{ if(sessionStorage.getItem('va_access')==='1') document.getElementById('gate').classList.add('hidden'); }catch(e){}
+})();
+
+// ════════════════════════════════════════
 // ════════════════════════════════════════
 let tkFlight=null;
 
