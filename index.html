@@ -373,7 +373,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(12,12,14,.92);backdrop-fil
 <div class="hero">
   <div class="hero-eyebrow">Upcoming &amp; Scheduled Flights</div>
   <h1 class="hero-title">Search Any Route<br><em>Today, Tomorrow, Any Day</em></h1>
-  <p class="hero-sub">Real airline schedules across all 50 states · Connect AviationStack for live departure data</p>
+  <p class="hero-sub">Real airline schedules across all 50 states, Canada, Mexico, Caribbean, Europe, Asia & beyond</p>
 </div>
 
 <div class="search-wrap">
@@ -407,15 +407,15 @@ nav{position:sticky;top:0;z-index:100;background:rgba(12,12,14,.92);backdrop-fil
     </div>
     <div class="suggestions">
       <button class="sug" onclick="qs('MSY','DFW')">MSY → DFW</button>
-      <button class="sug" onclick="qs('BRO','IAH')">BRO → IAH</button>
-      <button class="sug" onclick="qs('ORD','LAX')">ORD → LAX</button>
-      <button class="sug" onclick="qs('JFK','MIA')">JFK → MIA</button>
-      <button class="sug" onclick="qs('ATL','BOS')">ATL → BOS</button>
-      <button class="sug" onclick="qs('SEA','DEN')">SEA → DEN</button>
-      <button class="sug" onclick="qs('LAX','HNL')">LAX → HNL</button>
-      <button class="sug" onclick="qs('ANC','SEA')">ANC → SEA</button>
-      <button class="sug" onclick="qs('BNA','ORD')">BNA → ORD</button>
-      <button class="sug" onclick="qs('PDX','SFO')">PDX → SFO</button>
+      <button class="sug" onclick="qs('JFK','LHR')">JFK → London</button>
+      <button class="sug" onclick="qs('LAX','NRT')">LAX → Tokyo</button>
+      <button class="sug" onclick="qs('MIA','CUN')">MIA → Cancun</button>
+      <button class="sug" onclick="qs('ORD','YYZ')">ORD → Toronto</button>
+      <button class="sug" onclick="qs('JFK','CDG')">JFK → Paris</button>
+      <button class="sug" onclick="qs('MIA','BOG')">MIA → Bogota</button>
+      <button class="sug" onclick="qs('LAX','SYD')">LAX → Sydney</button>
+      <button class="sug" onclick="qs('JFK','DXB')">JFK → Dubai</button>
+      <button class="sug" onclick="qs('ATL','NBO')">ATL → Nairobi</button>
     </div>
   </div>
 </div>
@@ -447,7 +447,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(12,12,14,.92);backdrop-fil
 </div>
 
 <div class="al-section">
-  <div class="al-title">All US Airlines</div>
+  <div class="al-title">US & International Airlines</div>
   <div class="al-grid" id="algrid"></div>
 </div>
 
@@ -514,15 +514,112 @@ const AP = {
   SDF:{n:"Louisville Muhammad Ali Intl",c:"Louisville",s:"KY"},LEX:{n:"Blue Grass Airport",c:"Lexington",s:"KY"},
   BNA:{n:"Nashville Intl",c:"Nashville",s:"TN"},GRR:{n:"Gerald R. Ford Intl",c:"Grand Rapids",s:"MI"},
   SBN:{n:"South Bend Intl",c:"South Bend",s:"IN"},EVV:{n:"Evansville Regional",c:"Evansville",s:"IN"},
+  // ── CANADA ──
+  YYZ:{n:"Toronto Pearson Intl",c:"Toronto",s:"ON"},YVR:{n:"Vancouver Intl",c:"Vancouver",s:"BC"},
+  YUL:{n:"Montréal-Trudeau Intl",c:"Montreal",s:"QC"},YYC:{n:"Calgary Intl",c:"Calgary",s:"AB"},
+  YEG:{n:"Edmonton Intl",c:"Edmonton",s:"AB"},YOW:{n:"Ottawa Macdonald-Cartier Intl",c:"Ottawa",s:"ON"},
+  YHZ:{n:"Halifax Stanfield Intl",c:"Halifax",s:"NS"},YWG:{n:"Winnipeg Richardson Intl",c:"Winnipeg",s:"MB"},
+  YQB:{n:"Quebec City Jean Lesage Intl",c:"Quebec City",s:"QC"},YXE:{n:"Saskatoon John G. Diefenbaker Intl",c:"Saskatoon",s:"SK"},
+  YYJ:{n:"Victoria Intl",c:"Victoria",s:"BC"},YKA:{n:"Kamloops Airport",c:"Kamloops",s:"BC"},
+  // ── MEXICO ──
+  MEX:{n:"Benito Juárez Intl",c:"Mexico City",s:"Mexico"},CUN:{n:"Cancún Intl",c:"Cancun",s:"Mexico"},
+  GDL:{n:"Miguel Hidalgo y Costilla Intl",c:"Guadalajara",s:"Mexico"},MTY:{n:"General Mariano Escobedo Intl",c:"Monterrey",s:"Mexico"},
+  SJD:{n:"Los Cabos Intl",c:"Los Cabos",s:"Mexico"},PVR:{n:"Licenciado Gustavo Díaz Ordaz Intl",c:"Puerto Vallarta",s:"Mexico"},
+  MZT:{n:"General Rafael Buelna Intl",c:"Mazatlan",s:"Mexico"},ZIH:{n:"Ixtapa-Zihuatanejo Intl",c:"Zihuatanejo",s:"Mexico"},
+  ACA:{n:"General Juan N. Álvarez Intl",c:"Acapulco",s:"Mexico"},OAX:{n:"Xoxocotlán Intl",c:"Oaxaca",s:"Mexico"},
+  // ── CARIBBEAN ──
+  NAS:{n:"Lynden Pindling Intl",c:"Nassau",s:"Bahamas"},MBJ:{n:"Sangster Intl",c:"Montego Bay",s:"Jamaica"},
+  KIN:{n:"Norman Manley Intl",c:"Kingston",s:"Jamaica"},PUJ:{n:"Punta Cana Intl",c:"Punta Cana",s:"Dominican Republic"},
+  SDQ:{n:"Las Américas Intl",c:"Santo Domingo",s:"Dominican Republic"},SJU:{n:"Luis Muñoz Marín Intl",c:"San Juan",s:"Puerto Rico"},
+  AUA:{n:"Queen Beatrix Intl",c:"Oranjestad",s:"Aruba"},CUR:{n:"Hato Intl",c:"Willemstad",s:"Curacao"},
+  STT:{n:"Cyril E. King Airport",c:"St. Thomas",s:"USVI"},BGI:{n:"Grantley Adams Intl",c:"Bridgetown",s:"Barbados"},
+  GCM:{n:"Owen Roberts Intl",c:"George Town",s:"Cayman Islands"},HAV:{n:"José Martí Intl",c:"Havana",s:"Cuba"},
+  // ── CENTRAL AMERICA ──
+  GUA:{n:"La Aurora Intl",c:"Guatemala City",s:"Guatemala"},SAL:{n:"Monseñor Óscar Arnulfo Romero Intl",c:"San Salvador",s:"El Salvador"},
+  TGU:{n:"Toncontín Intl",c:"Tegucigalpa",s:"Honduras"},MGA:{n:"Augusto C. Sandino Intl",c:"Managua",s:"Nicaragua"},
+  SJO:{n:"Juan Santamaría Intl",c:"San Jose",s:"Costa Rica"},PTY:{n:"Tocumen Intl",c:"Panama City",s:"Panama"},
+  // ── SOUTH AMERICA ──
+  BOG:{n:"El Dorado Intl",c:"Bogota",s:"Colombia"},MDE:{n:"José María Córdova Intl",c:"Medellin",s:"Colombia"},
+  GRU:{n:"São Paulo/Guarulhos Intl",c:"Sao Paulo",s:"Brazil"},GIG:{n:"Rio de Janeiro/Galeão Intl",c:"Rio de Janeiro",s:"Brazil"},
+  LIM:{n:"Jorge Chávez Intl",c:"Lima",s:"Peru"},SCL:{n:"Arturo Merino Benítez Intl",c:"Santiago",s:"Chile"},
+  EZE:{n:"Ministro Pistarini Intl",c:"Buenos Aires",s:"Argentina"},UIO:{n:"Mariscal Sucre Intl",c:"Quito",s:"Ecuador"},
+  CCS:{n:"Simón Bolívar Intl",c:"Caracas",s:"Venezuela"},MVD:{n:"Carrasco Intl",c:"Montevideo",s:"Uruguay"},
+  // ── EUROPE ──
+  LHR:{n:"London Heathrow",c:"London",s:"UK"},LGW:{n:"London Gatwick",c:"London",s:"UK"},
+  CDG:{n:"Paris Charles de Gaulle",c:"Paris",s:"France"},ORY:{n:"Paris Orly",c:"Paris",s:"France"},
+  AMS:{n:"Amsterdam Airport Schiphol",c:"Amsterdam",s:"Netherlands"},FRA:{n:"Frankfurt Airport",c:"Frankfurt",s:"Germany"},
+  MAD:{n:"Adolfo Suárez Madrid–Barajas",c:"Madrid",s:"Spain"},BCN:{n:"Josep Tarradellas Barcelona–El Prat",c:"Barcelona",s:"Spain"},
+  FCO:{n:"Leonardo da Vinci–Fiumicino",c:"Rome",s:"Italy"},MXP:{n:"Milan Malpensa",c:"Milan",s:"Italy"},
+  ZRH:{n:"Zurich Airport",c:"Zurich",s:"Switzerland"},VIE:{n:"Vienna Intl",c:"Vienna",s:"Austria"},
+  CPH:{n:"Copenhagen Airport",c:"Copenhagen",s:"Denmark"},OSL:{n:"Oslo Gardermoen",c:"Oslo",s:"Norway"},
+  ARN:{n:"Stockholm Arlanda",c:"Stockholm",s:"Sweden"},HEL:{n:"Helsinki-Vantaa",c:"Helsinki",s:"Finland"},
+  DUB:{n:"Dublin Airport",c:"Dublin",s:"Ireland"},LIS:{n:"Humberto Delgado Airport",c:"Lisbon",s:"Portugal"},
+  ATH:{n:"Athens Intl Eleftherios Venizelos",c:"Athens",s:"Greece"},IST:{n:"Istanbul Airport",c:"Istanbul",s:"Turkey"},
+  BRU:{n:"Brussels Airport",c:"Brussels",s:"Belgium"},MUC:{n:"Munich Airport",c:"Munich",s:"Germany"},
+  WAW:{n:"Warsaw Chopin Airport",c:"Warsaw",s:"Poland"},PRG:{n:"Václav Havel Airport Prague",c:"Prague",s:"Czech Republic"},
+  // ── MIDDLE EAST ──
+  DXB:{n:"Dubai Intl",c:"Dubai",s:"UAE"},AUH:{n:"Abu Dhabi Intl",c:"Abu Dhabi",s:"UAE"},
+  DOH:{n:"Hamad Intl",c:"Doha",s:"Qatar"},RUH:{n:"King Khalid Intl",c:"Riyadh",s:"Saudi Arabia"},
+  JED:{n:"King Abdulaziz Intl",c:"Jeddah",s:"Saudi Arabia"},TLV:{n:"Ben Gurion Intl",c:"Tel Aviv",s:"Israel"},
+  AMM:{n:"Queen Alia Intl",c:"Amman",s:"Jordan"},KWI:{n:"Kuwait Intl",c:"Kuwait City",s:"Kuwait"},
+  BAH:{n:"Bahrain Intl",c:"Manama",s:"Bahrain"},MCT:{n:"Muscat Intl",c:"Muscat",s:"Oman"},
+  // ── ASIA ──
+  NRT:{n:"Tokyo Narita Intl",c:"Tokyo",s:"Japan"},HND:{n:"Tokyo Haneda",c:"Tokyo",s:"Japan"},
+  ICN:{n:"Seoul Incheon Intl",c:"Seoul",s:"South Korea"},PEK:{n:"Beijing Capital Intl",c:"Beijing",s:"China"},
+  PVG:{n:"Shanghai Pudong Intl",c:"Shanghai",s:"China"},HKG:{n:"Hong Kong Intl",c:"Hong Kong",s:"China"},
+  SIN:{n:"Singapore Changi",c:"Singapore",s:"Singapore"},BKK:{n:"Suvarnabhumi Airport",c:"Bangkok",s:"Thailand"},
+  KUL:{n:"Kuala Lumpur Intl",c:"Kuala Lumpur",s:"Malaysia"},CGK:{n:"Soekarno-Hatta Intl",c:"Jakarta",s:"Indonesia"},
+  MNL:{n:"Ninoy Aquino Intl",c:"Manila",s:"Philippines"},DEL:{n:"Indira Gandhi Intl",c:"New Delhi",s:"India"},
+  BOM:{n:"Chhatrapati Shivaji Maharaj Intl",c:"Mumbai",s:"India"},BLR:{n:"Kempegowda Intl",c:"Bangalore",s:"India"},
+  // ── AFRICA ──
+  JNB:{n:"O.R. Tambo Intl",c:"Johannesburg",s:"South Africa"},CPT:{n:"Cape Town Intl",c:"Cape Town",s:"South Africa"},
+  CAI:{n:"Cairo Intl",c:"Cairo",s:"Egypt"},CMN:{n:"Mohammed V Intl",c:"Casablanca",s:"Morocco"},
+  NBO:{n:"Jomo Kenyatta Intl",c:"Nairobi",s:"Kenya"},LOS:{n:"Murtala Muhammed Intl",c:"Lagos",s:"Nigeria"},
+  ACC:{n:"Kotoka Intl",c:"Accra",s:"Ghana"},ABV:{n:"Nnamdi Azikiwe Intl",c:"Abuja",s:"Nigeria"},
+  ADD:{n:"Addis Ababa Bole Intl",c:"Addis Ababa",s:"Ethiopia"},DKR:{n:"Blaise Diagne Intl",c:"Dakar",s:"Senegal"},
+  // ── OCEANIA ──
+  SYD:{n:"Sydney Kingsford Smith",c:"Sydney",s:"Australia"},MEL:{n:"Melbourne Airport",c:"Melbourne",s:"Australia"},
+  BNE:{n:"Brisbane Airport",c:"Brisbane",s:"Australia"},AKL:{n:"Auckland Airport",c:"Auckland",s:"New Zealand"},
+  CHC:{n:"Christchurch Intl",c:"Christchurch",s:"New Zealand"},PPT:{n:"Faa'a Intl",c:"Papeete",s:"French Polynesia"},
 };
 
-const IM = {"chicago":"ORD","o'hare":"ORD","ohare":"ORD","ord":"ORD","midway":"MDW","mdw":"MDW","new york":"JFK","jfk":"JFK","kennedy":"JFK","laguardia":"LGA","lga":"LGA","newark":"EWR","ewr":"EWR","los angeles":"LAX","lax":"LAX","atlanta":"ATL","atl":"ATL","denver":"DEN","den":"DEN","boston":"BOS","bos":"BOS","phoenix":"PHX","phx":"PHX","miami":"MIA","mia":"MIA","seattle":"SEA","sea":"SEA","san francisco":"SFO","sfo":"SFO","dallas":"DFW","dfw":"DFW","fort worth":"DFW","houston":"IAH","iah":"IAH","hobby":"HOU","hou":"HOU","honolulu":"HNL","hnl":"HNL","hawaii":"HNL","minneapolis":"MSP","msp":"MSP","detroit":"DTW","dtw":"DTW","philadelphia":"PHL","phl":"PHL","las vegas":"LAS","las":"LAS","vegas":"LAS","charlotte":"CLT","clt":"CLT","orlando":"MCO","mco":"MCO","anchorage":"ANC","anc":"ANC","fort lauderdale":"FLL","fll":"FLL","baltimore":"BWI","bwi":"BWI","washington":"DCA","reagan":"DCA","dca":"DCA","dulles":"IAD","iad":"IAD","new orleans":"MSY","msy":"MSY","louis armstrong":"MSY","armstrong":"MSY","baton rouge":"BTR","btr":"BTR","shreveport":"SHV","shv":"SHV","lafayette":"LFT","lft":"LFT","brownsville":"BRO","bro":"BRO","south padre":"BRO","san antonio":"SAT","sat":"SAT","austin":"AUS","aus":"AUS","el paso":"ELP","elp":"ELP","lubbock":"LBB","lbb":"LBB","midland":"MAF","maf":"MAF","amarillo":"AMA","ama":"AMA","corpus christi":"CRP","crp":"CRP","harlingen":"HRL","hrl":"HRL","mcallen":"MFE","mfe":"MFE","tampa":"TPA","tpa":"TPA","jacksonville":"JAX","jax":"JAX","pensacola":"PNS","pns":"PNS","fort myers":"RSW","rsw":"RSW","west palm":"PBI","pbi":"PBI","tallahassee":"TLH","tlh":"TLH","mobile":"MOB","mob":"MOB","birmingham":"BHM","bhm":"BHM","huntsville":"HSV","hsv":"HSV","greenville":"GSP","gsp":"GSP","charleston":"CHS","chs":"CHS","myrtle beach":"MYR","myr":"MYR","savannah":"SAV","sav":"SAV","nashville":"BNA","bna":"BNA","memphis":"MEM","mem":"MEM","knoxville":"TYS","tys":"TYS","chattanooga":"CHA","cha":"CHA","raleigh":"RDU","rdu":"RDU","richmond":"RIC","ric":"RIC","norfolk":"ORF","orf":"ORF","asheville":"AVL","avl":"AVL","hartford":"BDL","bdl":"BDL","providence":"PVD","pvd":"PVD","albany":"ALB","alb":"ALB","syracuse":"SYR","syr":"SYR","buffalo":"BUF","buf":"BUF","rochester":"ROC","roc":"ROC","pittsburgh":"PIT","pit":"PIT","st louis":"STL","stl":"STL","indianapolis":"IND","ind":"IND","columbus":"CMH","cmh":"CMH","cleveland":"CLE","cle":"CLE","milwaukee":"MKE","mke":"MKE","cincinnati":"CVG","cvg":"CVG","madison":"MSN","msn":"MSN","des moines":"DSM","dsm":"DSM","omaha":"OMA","oma":"OMA","kansas city":"MCI","mci":"MCI","oklahoma city":"OKC","okc":"OKC","tulsa":"TUL","tul":"TUL","salt lake":"SLC","slc":"SLC","albuquerque":"ABQ","abq":"ABQ","tucson":"TUS","tus":"TUS","boise":"BOI","boi":"BOI","bozeman":"BZN","bzn":"BZN","spokane":"GEG","geg":"GEG","jackson hole":"JAC","jac":"JAC","portland":"PDX","pdx":"PDX","sacramento":"SMF","smf":"SMF","san diego":"SAN","san":"SAN","san jose":"SJC","sjc":"SJC","oakland":"OAK","oak":"OAK","reno":"RNO","rno":"RNO","fairbanks":"FAI","fai":"FAI","juneau":"JNU","jnu":"JNU","maui":"OGG","ogg":"OGG","kona":"KOA","koa":"KOA","kauai":"LIH","lih":"LIH","fargo":"FAR","far":"FAR","bismarck":"BIS","bis":"BIS","sioux falls":"FSD","fsd":"FSD","rapid city":"RAP","rap":"RAP","wichita":"ICT","ict":"ICT","little rock":"LIT","lit":"LIT","jackson":"JAN","jan":"JAN","louisville":"SDF","sdf":"SDF","lexington":"LEX","lex":"LEX","grand rapids":"GRR","grr":"GRR"};
+const IM = {"chicago":"ORD","o'hare":"ORD","ohare":"ORD","ord":"ORD","midway":"MDW","mdw":"MDW","new york":"JFK","jfk":"JFK","kennedy":"JFK","laguardia":"LGA","lga":"LGA","newark":"EWR","ewr":"EWR","los angeles":"LAX","lax":"LAX","atlanta":"ATL","atl":"ATL","denver":"DEN","den":"DEN","boston":"BOS","bos":"BOS","phoenix":"PHX","phx":"PHX","miami":"MIA","mia":"MIA","seattle":"SEA","sea":"SEA","san francisco":"SFO","sfo":"SFO","dallas":"DFW","dfw":"DFW","fort worth":"DFW","houston":"IAH","iah":"IAH","hobby":"HOU","hou":"HOU","honolulu":"HNL","hnl":"HNL","hawaii":"HNL","minneapolis":"MSP","msp":"MSP","detroit":"DTW","dtw":"DTW","philadelphia":"PHL","phl":"PHL","las vegas":"LAS","las":"LAS","vegas":"LAS","charlotte":"CLT","clt":"CLT","orlando":"MCO","mco":"MCO","anchorage":"ANC","anc":"ANC","fort lauderdale":"FLL","fll":"FLL","baltimore":"BWI","bwi":"BWI","washington":"DCA","reagan":"DCA","dca":"DCA","dulles":"IAD","iad":"IAD","new orleans":"MSY","msy":"MSY","louis armstrong":"MSY","armstrong":"MSY","baton rouge":"BTR","btr":"BTR","shreveport":"SHV","shv":"SHV","lafayette":"LFT","lft":"LFT","brownsville":"BRO","bro":"BRO","south padre":"BRO","san antonio":"SAT","sat":"SAT","austin":"AUS","aus":"AUS","el paso":"ELP","elp":"ELP","lubbock":"LBB","lbb":"LBB","midland":"MAF","maf":"MAF","amarillo":"AMA","ama":"AMA","corpus christi":"CRP","crp":"CRP","harlingen":"HRL","hrl":"HRL","mcallen":"MFE","mfe":"MFE","tampa":"TPA","tpa":"TPA","jacksonville":"JAX","jax":"JAX","pensacola":"PNS","pns":"PNS","fort myers":"RSW","rsw":"RSW","west palm":"PBI","pbi":"PBI","tallahassee":"TLH","tlh":"TLH","mobile":"MOB","mob":"MOB","birmingham":"BHM","bhm":"BHM","huntsville":"HSV","hsv":"HSV","greenville":"GSP","gsp":"GSP","charleston":"CHS","chs":"CHS","myrtle beach":"MYR","myr":"MYR","savannah":"SAV","sav":"SAV","nashville":"BNA","bna":"BNA","memphis":"MEM","mem":"MEM","knoxville":"TYS","tys":"TYS","chattanooga":"CHA","cha":"CHA","raleigh":"RDU","rdu":"RDU","richmond":"RIC","ric":"RIC","norfolk":"ORF","orf":"ORF","asheville":"AVL","avl":"AVL","hartford":"BDL","bdl":"BDL","providence":"PVD","pvd":"PVD","albany":"ALB","alb":"ALB","syracuse":"SYR","syr":"SYR","buffalo":"BUF","buf":"BUF","rochester":"ROC","roc":"ROC","pittsburgh":"PIT","pit":"PIT","st louis":"STL","stl":"STL","indianapolis":"IND","ind":"IND","columbus":"CMH","cmh":"CMH","cleveland":"CLE","cle":"CLE","milwaukee":"MKE","mke":"MKE","cincinnati":"CVG","cvg":"CVG","madison":"MSN","msn":"MSN","des moines":"DSM","dsm":"DSM","omaha":"OMA","oma":"OMA","kansas city":"MCI","mci":"MCI","oklahoma city":"OKC","okc":"OKC","tulsa":"TUL","tul":"TUL","salt lake":"SLC","slc":"SLC","albuquerque":"ABQ","abq":"ABQ","tucson":"TUS","tus":"TUS","boise":"BOI","boi":"BOI","bozeman":"BZN","bzn":"BZN","spokane":"GEG","geg":"GEG","jackson hole":"JAC","jac":"JAC","portland":"PDX","pdx":"PDX","sacramento":"SMF","smf":"SMF","san diego":"SAN","san":"SAN","san jose":"SJC","sjc":"SJC","oakland":"OAK","oak":"OAK","reno":"RNO","rno":"RNO","fairbanks":"FAI","fai":"FAI","juneau":"JNU","jnu":"JNU","maui":"OGG","ogg":"OGG","kona":"KOA","koa":"KOA","kauai":"LIH","lih":"LIH","fargo":"FAR","far":"FAR","bismarck":"BIS","bis":"BIS","sioux falls":"FSD","fsd":"FSD","rapid city":"RAP","rap":"RAP","wichita":"ICT","ict":"ICT","little rock":"LIT","lit":"LIT","jackson":"JAN","jan":"JAN","louisville":"SDF","sdf":"SDF","lexington":"LEX","lex":"LEX","grand rapids":"GRR","grr":"GRR",
+  // Canada
+  "toronto":"YYZ","yyz":"YYZ","pearson":"YYZ","vancouver":"YVR","yvr":"YVR","montreal":"YUL","yul":"YUL","calgary":"YYC","yyc":"YYC","edmonton":"YEG","yeg":"YEG","ottawa":"YOW","yow":"YOW","halifax":"YHZ","yhz":"YHZ","winnipeg":"YWG","ywg":"YWG","quebec city":"YQB","yqb":"YQB","saskatoon":"YXE","yxe":"YXE","victoria":"YYJ","yyj":"YYJ",
+  // Mexico
+  "mexico city":"MEX","mex":"MEX","cancun":"CUN","cun":"CUN","guadalajara":"GDL","gdl":"GDL","monterrey":"MTY","mty":"MTY","los cabos":"SJD","sjd":"SJD","cabo":"SJD","puerto vallarta":"PVR","pvr":"PVR","mazatlan":"MZT","mzt":"MZT","oaxaca":"OAX","oax":"OAX",
+  // Caribbean
+  "nassau":"NAS","nas":"NAS","bahamas":"NAS","montego bay":"MBJ","mbj":"MBJ","jamaica":"MBJ","kingston":"KIN","kin":"KIN","punta cana":"PUJ","puj":"PUJ","santo domingo":"SDQ","sdq":"SDQ","san juan":"SJU","sju":"SJU","puerto rico":"SJU","aruba":"AUA","aua":"AUA","barbados":"BGI","bgi":"BGI","cayman":"GCM","gcm":"GCM","havana":"HAV","hav":"HAV","cuba":"HAV",
+  // Central America
+  "guatemala":"GUA","gua":"GUA","san salvador":"SAL","sal":"SAL","panama":"PTY","pty":"PTY","costa rica":"SJO","sjo":"SJO","managua":"MGA","mga":"MGA",
+  // South America
+  "bogota":"BOG","bog":"BOG","colombia":"BOG","medellin":"MDE","mde":"MDE","sao paulo":"GRU","gru":"GRU","rio de janeiro":"GIG","gig":"GIG","rio":"GIG","lima":"LIM","lim":"LIM","peru":"LIM","santiago":"SCL","scl":"SCL","chile":"SCL","buenos aires":"EZE","eze":"EZE","argentina":"EZE","quito":"UIO","uio":"UIO","caracas":"CCS","ccs":"CCS","montevideo":"MVD","mvd":"MVD",
+  // Europe
+  "london":"LHR","heathrow":"LHR","lhr":"LHR","gatwick":"LGW","lgw":"LGW","paris":"CDG","cdg":"CDG","charles de gaulle":"CDG","orly":"ORY","ory":"ORY","amsterdam":"AMS","ams":"AMS","frankfurt":"FRA","fra":"FRA","madrid":"MAD","mad":"MAD","barcelona":"BCN","bcn":"BCN","rome":"FCO","fco":"FCO","milan":"MXP","mxp":"MXP","zurich":"ZRH","zrh":"ZRH","vienna":"VIE","vie":"VIE","copenhagen":"CPH","cph":"CPH","oslo":"OSL","osl":"OSL","stockholm":"ARN","arn":"ARN","helsinki":"HEL","hel":"HEL","dublin":"DUB","dub":"DUB","lisbon":"LIS","lis":"LIS","athens":"ATH","ath":"ATH","istanbul":"IST","ist":"IST","brussels":"BRU","bru":"BRU","munich":"MUC","muc":"MUC","warsaw":"WAW","waw":"WAW","prague":"PRG","prg":"PRG",
+  // Middle East
+  "dubai":"DXB","dxb":"DXB","abu dhabi":"AUH","auh":"AUH","doha":"DOH","doh":"DOH","qatar":"DOH","riyadh":"RUH","ruh":"RUH","jeddah":"JED","jed":"JED","tel aviv":"TLV","tlv":"TLV","israel":"TLV","amman":"AMM","amm":"AMM","kuwait":"KWI","kwi":"KWI","muscat":"MCT","mct":"MCT",
+  // Asia
+  "tokyo":"NRT","nrt":"NRT","narita":"NRT","haneda":"HND","hnd":"HND","seoul":"ICN","icn":"ICN","beijing":"PEK","pek":"PEK","shanghai":"PVG","pvg":"PVG","hong kong":"HKG","hkg":"HKG","singapore":"SIN","sin":"SIN","bangkok":"BKK","bkk":"BKK","kuala lumpur":"KUL","kul":"KUL","jakarta":"CGK","cgk":"CGK","manila":"MNL","mnl":"MNL","delhi":"DEL","del":"DEL","new delhi":"DEL","mumbai":"BOM","bom":"BOM","bangalore":"BLR","blr":"BLR",
+  // Africa
+  "johannesburg":"JNB","jnb":"JNB","cape town":"CPT","cpt":"CPT","cairo":"CAI","cai":"CAI","casablanca":"CMN","cmn":"CMN","nairobi":"NBO","nbo":"NBO","lagos":"LOS","los":"LOS","accra":"ACC","acc":"ACC","abuja":"ABV","abv":"ABV","addis ababa":"ADD","add":"ADD","dakar":"DKR","dkr":"DKR",
+  // Oceania
+  "sydney":"SYD","syd":"SYD","melbourne":"MEL","mel":"MEL","brisbane":"BNE","bne":"BNE","auckland":"AKL","akl":"AKL","christchurch":"CHC","chc":"CHC","tahiti":"PPT","ppt":"PPT","papeete":"PPT"
+};
 
 const AL = [
   {c:'AA',n:'American Airlines'},{c:'UA',n:'United Airlines'},{c:'DL',n:'Delta Air Lines'},
   {c:'WN',n:'Southwest Airlines'},{c:'B6',n:'JetBlue Airways'},{c:'AS',n:'Alaska Airlines'},
   {c:'NK',n:'Spirit Airlines'},{c:'F9',n:'Frontier Airlines'},{c:'G4',n:'Allegiant Air'},
   {c:'SY',n:'Sun Country Airlines'},{c:'HA',n:'Hawaiian Airlines'},{c:'MX',n:'Breeze Airways'},
+  // International carriers
+  {c:'AC',n:'Air Canada'},{c:'WS',n:'WestJet'},{c:'AM',n:'Aeromexico'},
+  {c:'BA',n:'British Airways'},{c:'AF',n:'Air France'},{c:'LH',n:'Lufthansa'},
+  {c:'IB',n:'Iberia'},{c:'AZ',n:'ITA Airways'},{c:'KL',n:'KLM'},
+  {c:'EK',n:'Emirates'},{c:'QR',n:'Qatar Airways'},{c:'EY',n:'Etihad Airways'},
+  {c:'TK',n:'Turkish Airlines'},{c:'SQ',n:'Singapore Airlines'},{c:'CX',n:'Cathay Pacific'},
+  {c:'NH',n:'All Nippon Airways'},{c:'JL',n:'Japan Airlines'},{c:'KE',n:'Korean Air'},
+  {c:'QF',n:'Qantas'},{c:'NZ',n:'Air New Zealand'},{c:'LA',n:'LATAM Airlines'},
+  {c:'AV',n:'Avianca'},{c:'CM',n:'Copa Airlines'},{c:'ET',n:'Ethiopian Airlines'},
 ];
 
 const PERKS = {
@@ -531,13 +628,23 @@ const PERKS = {
   first:['🧳 3 Bags Free','👨‍🍳 Chef\'s Menu','🛏 Private Suite','🍾 Dom Pérignon','🚗 Chauffeur Transfer','🌟 Dedicated Concierge'],
 };
 
-const PR = {economy:{short:109,medium:209,long:329,intl:499},business:{short:390,medium:850,long:1390,intl:2900},first:{short:780,medium:1700,long:2790,intl:6800}};
+const PR = {economy:{short:109,medium:209,long:329,intl:649,intercont:999},business:{short:390,medium:850,long:1390,intl:2900,intercont:5500},first:{short:780,medium:1700,long:2790,intl:6800,intercont:12000}};
 
-const CO = {ORD:[41.97,-87.90],MDW:[41.78,-87.74],LAX:[33.94,-118.40],JFK:[40.63,-73.78],ATL:[33.63,-84.42],DFW:[32.89,-97.04],DEN:[39.85,-104.67],SFO:[37.62,-122.38],MIA:[25.79,-80.29],SEA:[47.44,-122.31],BOS:[42.36,-71.01],PHX:[33.43,-112.01],IAH:[29.98,-95.33],HOU:[29.64,-95.27],HNL:[21.32,-157.92],ANC:[61.17,-149.99],MSY:[29.99,-90.25],BRO:[25.90,-97.42],AUS:[30.19,-97.66],SAT:[29.53,-98.46],BNA:[36.12,-86.67],MEM:[35.04,-89.97],RDU:[35.87,-78.78],CLT:[35.21,-80.94],PHL:[39.87,-75.24],PIT:[40.49,-80.23],STL:[38.74,-90.37],MCI:[39.29,-94.71],OKC:[35.39,-97.60],TUL:[36.19,-95.88],SLC:[40.78,-111.97],PDX:[45.58,-122.59],SAN:[32.73,-117.19],SMF:[38.69,-121.59],LAS:[36.08,-115.15],TPA:[27.97,-82.53],JAX:[30.49,-81.68],MCO:[28.42,-81.31],FLL:[26.07,-80.15],OGG:[20.89,-156.43],KOA:[19.73,-156.04],FAI:[64.81,-147.86],JNU:[58.35,-134.57],OAK:[37.72,-122.22],SJC:[37.36,-121.93],RNO:[39.49,-119.77],BOI:[43.56,-116.22],BZN:[45.77,-111.15],GEG:[47.62,-117.53],DCA:[38.85,-77.04],IAD:[38.94,-77.45],EWR:[40.69,-74.17],BWI:[39.17,-76.67],MSP:[44.88,-93.22],DTW:[42.21,-83.35],LGA:[40.77,-73.87],ELP:[31.80,-106.37]};
+const CO = {ORD:[41.97,-87.90],MDW:[41.78,-87.74],LAX:[33.94,-118.40],JFK:[40.63,-73.78],ATL:[33.63,-84.42],DFW:[32.89,-97.04],DEN:[39.85,-104.67],SFO:[37.62,-122.38],MIA:[25.79,-80.29],SEA:[47.44,-122.31],BOS:[42.36,-71.01],PHX:[33.43,-112.01],IAH:[29.98,-95.33],HOU:[29.64,-95.27],HNL:[21.32,-157.92],ANC:[61.17,-149.99],MSY:[29.99,-90.25],BRO:[25.90,-97.42],AUS:[30.19,-97.66],SAT:[29.53,-98.46],BNA:[36.12,-86.67],MEM:[35.04,-89.97],RDU:[35.87,-78.78],CLT:[35.21,-80.94],PHL:[39.87,-75.24],PIT:[40.49,-80.23],STL:[38.74,-90.37],MCI:[39.29,-94.71],OKC:[35.39,-97.60],TUL:[36.19,-95.88],SLC:[40.78,-111.97],PDX:[45.58,-122.59],SAN:[32.73,-117.19],SMF:[38.69,-121.59],LAS:[36.08,-115.15],TPA:[27.97,-82.53],JAX:[30.49,-81.68],MCO:[28.42,-81.31],FLL:[26.07,-80.15],OGG:[20.89,-156.43],KOA:[19.73,-156.04],FAI:[64.81,-147.86],JNU:[58.35,-134.57],OAK:[37.72,-122.22],SJC:[37.36,-121.93],RNO:[39.49,-119.77],BOI:[43.56,-116.22],BZN:[45.77,-111.15],GEG:[47.62,-117.53],DCA:[38.85,-77.04],IAD:[38.94,-77.45],EWR:[40.69,-74.17],BWI:[39.17,-76.67],MSP:[44.88,-93.22],DTW:[42.21,-83.35],LGA:[40.77,-73.87],ELP:[31.80,-106.37],
+  // Canada
+  YYZ:[43.68,-79.63],YVR:[49.19,-123.18],YUL:[45.47,-73.74],YYC:[51.13,-114.01],YEG:[53.30,-113.58],YOW:[45.32,-75.67],YHZ:[44.88,-63.51],YWG:[49.91,-97.24],YQB:[46.79,-71.39],
+  // Mexico & Caribbean
+  MEX:[19.43,-99.07],CUN:[21.04,-86.87],GDL:[20.52,-103.31],MTY:[25.77,-100.11],SJD:[23.15,-109.72],PVR:[20.68,-105.25],NAS:[25.04,-77.47],MBJ:[18.50,-77.91],PUJ:[18.57,-68.36],SJU:[18.44,-66.00],HAV:[22.99,-82.41],PTY:[9.07,-79.38],BOG:[4.70,-74.14],GRU:[-23.43,-46.47],GIG:[-22.80,-43.24],LIM:[-12.02,-77.11],SCL:[-33.39,-70.79],EZE:[-34.82,-58.53],
+  // Europe
+  LHR:[51.47,-0.46],LGW:[51.15,-0.18],CDG:[49.01,2.55],AMS:[52.31,4.76],FRA:[50.04,8.56],MAD:[40.47,-3.57],BCN:[41.30,2.08],FCO:[41.80,12.25],MXP:[45.63,8.72],ZRH:[47.46,8.55],VIE:[48.11,16.57],CPH:[55.62,12.66],OSL:[60.19,11.10],ARN:[59.65,17.92],HEL:[60.32,24.96],DUB:[53.42,-6.27],LIS:[38.78,-9.13],ATH:[37.94,23.95],IST:[41.27,28.74],BRU:[50.90,4.48],MUC:[48.35,11.79],
+  // Middle East & Asia
+  DXB:[25.25,55.36],DOH:[25.27,51.61],AUH:[24.43,54.65],TLV:[32.01,34.89],RUH:[24.96,46.70],NRT:[35.77,140.39],HND:[35.55,139.78],ICN:[37.46,126.44],PEK:[40.07,116.58],PVG:[31.14,121.80],HKG:[22.31,113.91],SIN:[1.36,103.99],BKK:[13.68,100.75],KUL:[2.74,101.70],DEL:[28.56,77.10],BOM:[19.09,72.87],
+  // Africa & Oceania
+  JNB:[-26.13,28.24],CPT:[-33.96,18.60],CAI:[30.12,31.41],NBO:[-1.32,36.92],LOS:[6.58,3.32],ACC:[5.60,-0.17],ADD:[8.98,38.80],SYD:[-33.94,151.18],MEL:[-37.67,144.84],BNE:[-27.38,153.12],AKL:[-37.01,174.79]};
 
 let cls = 'economy', openId = null, apiKey = '8b22c33fdb02da4f5f8842761ab71afa';
 
-// API key pre-configured
+// API key is pre-configured
 
 function fmtD(d){ return d.toISOString().split('T')[0]; }
 
@@ -562,7 +669,7 @@ function ri(f,t){
   const d=R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
   const m=Math.round(d/8.1+40);
   const h=Math.floor(m/60),mn=m%60;
-  return {d,dur:`${h}h ${String(mn).padStart(2,'0')}m`,tp:d<500?'short':d<1500?'medium':'long'};
+  return {d,dur:`${h}h ${String(mn).padStart(2,'0')}m`,tp:d<500?'short':d<1500?'medium':d<3500?'long':d<6000?'intl':'intercont'};
 }
 
 function addM(t,m){
@@ -573,7 +680,7 @@ function addM(t,m){
 function price(tp){ const b=PR[cls][tp]||PR[cls].medium; return Math.round((b*(0.82+Math.random()*.36))/5)*5; }
 
 function aircraft(tp){
-  const m={short:['Embraer E175','CRJ-700','Boeing 737-700','Airbus A319'],medium:['Boeing 737-800','Airbus A320','Boeing 737 MAX 8','Airbus A321'],long:['Boeing 737-900ER','Boeing 757-200','Boeing 767-300','Boeing 787-9']};
+  const m={short:['Embraer E175','CRJ-700','Boeing 737-700','Airbus A319'],medium:['Boeing 737-800','Airbus A320','Boeing 737 MAX 8','Airbus A321'],long:['Boeing 737-900ER','Airbus A321','Boeing 757-200','Boeing 767-300'],intl:['Boeing 787-9','Boeing 777-200','Airbus A330-300','Boeing 767-400'],intercont:['Boeing 777-300ER','Airbus A350-900','Boeing 787-10','Airbus A380']};
   const l=m[tp]||m.medium; return l[Math.floor(Math.random()*l.length)];
 }
 
@@ -799,7 +906,6 @@ function saveKey(){
   updateBadge(); setTimeout(closeMod,1500);
 }
 function updateBadge(){
-  if(!apiKey) return;
   document.getElementById('nbadge').innerHTML='<span class="live-dot"></span>AviationStack Live';
   const b=document.getElementById('apibtn'); b.textContent='⚡ Live Connected'; b.style.color='var(--green)'; b.style.borderColor='rgba(46,204,113,.4)';
 }
